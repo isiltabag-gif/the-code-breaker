@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Code Breaker · Walter Isaacson</title>
+<meta name="description" content="Walter Isaacson'ın The Code Breaker kitabı için Işıl Tabağ'ın hazırladığı etkileşimli çalışma.">
+<style>
+:root{--navy:#0f1f3d;--navy2:#18305a;--ink:#2b2f36;--muted:#5b6472;--line:#dfe3ea;--bg:#f4f6f9;--white:#fff;--accent:#1a8577;--ok:#1d5c4a;--okbg:#eaf3ef;--bad:#8a2d2d;--badbg:#f8eded}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:Inter,"Segoe UI",-apple-system,BlinkMacSystemFont,Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;font-size:16px}
+a{color:var(--navy2)}
+header.top{background:var(--navy);color:#fff;position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.top-in{max-width:980px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand{font-weight:700;letter-spacing:.02em;font-size:15px}
+.brand span{color:#c9cfdb;font-weight:400}
+.part-tag{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#7fd1c4;white-space:nowrap}
+.progress-wrap{background:var(--navy2);height:6px}
+.progress-bar{height:6px;background:var(--accent);width:0;transition:width .35s ease}
+.progress-label{max-width:980px;margin:0 auto;padding:4px 20px 8px;font-size:12px;color:#c9cfdb}
+main{max-width:980px;margin:0 auto;padding:28px 20px 40px}
+.card{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:34px 38px;box-shadow:0 1px 2px rgba(15,31,61,.04)}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 6px}
+h1{font-size:30px;line-height:1.2;color:var(--navy);margin:0 0 18px}
+h2{font-size:21px;color:var(--navy);margin:28px 0 10px}
+h3{font-size:17px;color:var(--navy);margin:20px 0 8px}
+p{margin:0 0 14px}
+.en{color:var(--muted);font-style:italic;font-weight:400}
+.bridge{background:#f1f3f7;border-radius:8px;padding:10px 14px;color:#3a4150}
+.lead{font-size:18px;color:#3a4150}
+.concept{border-left:4px solid var(--accent);background:#f7f8fb;padding:14px 18px;margin:18px 0;border-radius:0 8px 8px 0}
+.concept b.t{display:block;color:var(--navy);font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.note{font-size:13.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:20px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+.fact{border:1px solid var(--line);border-radius:8px;padding:12px 14px;background:#fbfcfd}
+.fact .n{font-size:22px;font-weight:700;color:var(--navy);display:block;line-height:1.2}
+.fact .d{font-size:13.5px;color:var(--muted)}
+ul.clean{padding-left:20px;margin:0 0 14px}
+ul.clean li{margin-bottom:6px}
+table.t{border-collapse:collapse;width:100%;margin:12px 0 18px;font-size:14.5px}
+table.t th,table.t td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.t th{background:#f1f3f7;color:var(--navy)}
+.q{margin-top:28px;border:1px solid #cfd6e2;border-radius:10px;padding:22px 24px;background:#fbfcfe}
+.q .qh{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--navy2);font-weight:700;margin-bottom:6px}
+.q .qp{font-weight:600;color:var(--navy);font-size:17px;margin-bottom:14px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;border:1px solid #cfd6e2;background:#fff;border-radius:8px;padding:12px 14px;font:inherit;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+.opt:hover:not([disabled]){border-color:var(--navy2);background:#f5f7fb}
+.opt:focus-visible{outline:3px solid #9fb3d9;outline-offset:2px}
+.opt .k{flex:0 0 28px;height:28px;border-radius:50%;border:1px solid #b8c1d1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--navy)}
+.opt[disabled]{cursor:default}
+.opt.wrong{border-color:#d9b3b3;background:var(--badbg);color:#6d3a3a}
+.opt.wrong .k{border-color:var(--bad);color:var(--bad)}
+.opt.right{border-color:var(--ok);background:var(--okbg)}
+.opt.right .k{background:var(--ok);border-color:var(--ok);color:#fff}
+.fb{margin-top:14px;padding:12px 16px;border-radius:8px;font-size:15px;display:none}
+.fb.show{display:block}
+.fb.bad{background:var(--badbg);border:1px solid #e3c4c4;color:#5e2a2a}
+.fb.good{background:var(--okbg);border:1px solid #bfd9cf;color:#173f33}
+.fb b{display:block;margin-bottom:2px}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;padding:11px 20px;font:inherit;font-weight:600;cursor:pointer;border:1px solid var(--navy);background:var(--navy);color:#fff;text-decoration:none;min-height:44px}
+.btn:hover{background:var(--navy2)}
+.btn.sec{background:#fff;color:var(--navy)}
+.btn.sec:hover{background:#f1f3f7}
+.btn.acc{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.hint{font-size:13.5px;color:var(--muted);text-align:center;flex:1}
+.letter{font-family:Georgia,"Noto Serif","Times New Roman",serif;font-size:17.5px;line-height:1.75;color:#262a31}
+.letter p{margin-bottom:16px}
+.sign{margin-top:22px;font-style:italic}
+.cover-hero{background:var(--navy);color:#fff;border-radius:10px;padding:40px 38px;margin-bottom:22px}
+.cover-hero h1{color:#fff;font-size:36px;margin-bottom:6px}
+.cover-hero .by{color:#c9cfdb;font-size:17px}
+.cover-hero .eyebrow{color:#7fd1c4}
+.resume{border:1px solid #7fd1c4;background:#eef8f6;border-radius:10px;padding:18px 22px;margin-bottom:22px}
+.resume p{margin-bottom:10px}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px}
+.final-msg{font-size:20px;font-weight:600;color:var(--navy);border-left:4px solid var(--accent);padding:6px 0 6px 16px;margin:0 0 22px}
+.score{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:8px 0 6px}
+.score .big{white-space:nowrap;font-size:42px;font-weight:800;color:var(--navy)}
+form.f{display:grid;gap:14px;margin-top:10px;max-width:520px}
+label{font-weight:600;color:var(--navy);font-size:14.5px;display:block;margin-bottom:4px}
+input[type=text],input[type=email]{width:100%;padding:11px 12px;border:1px solid #c3cbd9;border-radius:8px;font:inherit;background:#fff}
+input:focus{outline:3px solid #b9c8e6;border-color:var(--navy2)}
+.req{color:var(--bad)}
+.err{color:var(--bad);font-size:14px;margin-top:4px;display:none}
+.err.show{display:block}
+.status{margin-top:14px;padding:12px 16px;border-radius:8px;display:none;font-size:15px}
+.status.show{display:block}
+.status.ok{background:var(--okbg);border:1px solid #bfd9cf;color:#173f33}
+.status.no{background:var(--badbg);border:1px solid #e3c4c4;color:#5e2a2a}
+.status.info{background:#eef2f8;border:1px solid #cfd8e8;color:var(--navy)}
+.continue{margin-top:30px;border-top:1px solid var(--line);padding-top:22px}
+.missing{background:#eef8f6;border:1px solid #b9e0d9;border-radius:8px;padding:14px 18px}
+.schema{display:grid;gap:14px;margin:18px 0}
+.schema .core{background:var(--navy);color:#fff;border-radius:10px;padding:18px 20px;text-align:center}
+.schema .core b{display:block;font-size:18px;margin-bottom:4px}
+.schema .core span{color:#c9cfdb;font-size:14.5px}
+.schema .arrow{text-align:center;color:var(--muted);font-size:13px;letter-spacing:.1em;text-transform:uppercase}
+.schema .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.schema .box{border:1px solid #cfd6e2;border-top:4px solid var(--navy2);border-radius:8px;padding:14px;background:#fff}
+.schema .box h4{margin:0 0 6px;color:var(--navy);font-size:15.5px}
+.schema .box p{font-size:13.5px;margin:0 0 8px;color:#3a4150}
+.schema .box .sol{font-size:13px;border-top:1px dashed #cfd6e2;padding-top:8px;color:var(--navy)}
+.schema .box .sol b{color:var(--accent)}
+.schema .base{background:#f1f3f7;border:1px solid var(--line);border-radius:10px;padding:14px 18px;text-align:center;font-size:14.5px}
+.check{list-style:none;padding:0;margin:0}
+.check li{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--navy)}
+.check label{font-weight:400;color:var(--ink);font-size:15.5px;margin:0}
+.keyq{counter-reset:k;list-style:none;padding:0}
+.keyq li{counter-increment:k;padding:8px 0 8px 40px;position:relative;border-bottom:1px solid var(--line)}
+.keyq li:before{content:counter(k);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.schema .grid .box:nth-child(1){border-top-color:#1a8577}
+.dna-strip{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.3em;color:#7fd1c4;font-size:13px;margin-top:14px;word-break:break-all}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0}
+.flow span.n{background:var(--navy);color:#fff;border-radius:6px;padding:6px 12px;font-weight:700;font-size:14px}
+.flow span.a{color:var(--accent);font-weight:700}
+footer{max-width:980px;margin:0 auto;padding:0 20px 30px;color:var(--muted);font-size:12.5px;text-align:center}
+@media (max-width:760px){
+ .card{padding:22px 18px}
+ .cover-hero{padding:28px 20px}
+ .cover-hero h1{font-size:28px}
+ h1{font-size:24px}
+ .schema .grid{grid-template-columns:1fr 1fr}
+ .q{padding:18px 14px}
+ .nav{flex-wrap:wrap}
+ .nav .hint{order:3;flex-basis:100%}
+ .letter{font-size:16.5px}
+ .brand span{display:none}
+}
+@media (max-width:460px){.schema .grid{grid-template-columns:1fr}.btnrow .btn{width:100%}main{padding:16px 10px 30px}}
+</style>
+</head>
+<body>
+<header class="top">
+ <div class="top-in"><div class="brand">The Code Breaker <span>· Walter Isaacson</span></div><div class="part-tag" id="partTag">Giriş</div></div>
+ <div class="progress-wrap" aria-hidden="true"><div class="progress-bar" id="bar"></div></div>
+ <div class="progress-label" id="progLabel" aria-live="polite"></div>
+</header>
+<main id="app" tabindex="-1"></main>
+<footer>Hazırlayan: Işıl Tabağ · Kitap: Walter Isaacson, <em>The Code Breaker: Jennifer Doudna, Gene Editing, and the Future of the Human Race</em> (2021). Kitaptaki tarih, sayı ve şirket örnekleri, kitabın yazıldığı döneme ait tarihsel örneklerdir.</footer>
+<script>
+const SECTIONS = {
+  A: "Merak ve yaşamın dili",
+  B: "CRISPR'ın keşfi",
+  C: "Tedaviden CRISPR bebeklerine",
+  D: "Etik ve gelecek"
+};
+
+const PART1 = [
+{
+ id:"a1", sec:"A", chapter:"Bölüm 1, 6 ve 7 · Hilo, RNA, Kıvrımlar",
+ title:"Merakla başlayan bir yol: Yapı işlevi belirler",
+ html:`
+<p class="lead">Jennifer Doudna 1971'de, yedi yaşındayken ailesiyle Hawaii'deki volkanik Hilo kasabasına taşınır. Okulda kendini yabancı hisseder, ama doğa onu büyüler: Lav tünellerindeki gözsüz örümcekler ve dokununca yapraklarını kapatan "uyuyan ot" (sleeping grass). Sorusu basittir: <strong>Dokununca yaprakların kapanmasına ne sebep oluyor?</strong></p>
+<p>Altıncı sınıftayken babası yatağının üzerine James Watson'ın <em>Çift Sarmal</em> (The Double Helix) kitabını bırakır. Jennifer onu bir dedektif romanı sanar. Kitaptan iki şey alır: Bir kadının da büyük bir bilim insanı olabileceğini (Rosalind Franklin'in hikâyesi) ve kariyerini şekillendirecek fikri: <strong>Bir molekülün biçimi ve yapısı, oynayabileceği biyolojik rolü belirler.</strong></p>
+<h3>Neden DNA değil de RNA?</h3>
+<p>Crick'in "merkezî dogma" (central dogma) dediği akışta bilgi DNA'dan haberci RNA'ya (messenger RNA), oradan proteine geçer. 1980'lerde Thomas Cech ve Sidney Altman bazı RNA'ların enzim gibi de çalışabildiğini keşfeder: <strong>ribozimler</strong> (ribozymes). Yani RNA hem bilgi taşıyabilir hem de tepkime yürütebilir. Bu yüzden birçok bilim insanı, yaşamın başlangıcında kendini kopyalayabilen RNA'nın olduğunu düşünür: "RNA dünyası" (RNA world) hipotezi.</p>
+<p>Doudna Harvard'da Jack Szostak'ın laboratuvarında RNA üzerinde çalışan ilk lisansüstü öğrenci olur. Szostak'tan iki ders alır: "Bin kişinin yaptığı bir şeyi yapma" ve "Büyük sorular sor." Sonra Yale'de, bir ribozimin üç boyutlu yapısını kristalografiyle (crystallography) çözerek adını duyurur.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Yapı işlevi belirler:</strong> Bir molekülün nasıl katlandığını ve hangi şekli aldığını bilmek, ne iş yaptığını anlamanın anahtarıdır. Doudna'nın bütün kariyeri bu fikir üzerine kuruludur.</div>
+<p class="note">Kitap 2021'de yayımlandı. Kitaptaki tarihler, sayılar ve şirketler kitabın yazıldığı döneme ait tarihsel örneklerdir.</p>`,
+ learn:["Doudna'nın bilim yolu çocukluktaki merakla başlar: Hilo'da uyuyan otun neden kapandığını merak eder.","Watson'ın Çift Sarmal kitabından aldığı temel fikir: Bir molekülün yapısı biyolojik işlevini belirler.","Merkezî dogma: Bilgi DNA'dan RNA'ya, RNA'dan proteine akar.","Ribozimler, enzim gibi çalışabilen RNA'lardır; bu keşif 'RNA dünyası' hipotezini güçlendirir.","Szostak'ın dersleri: Bin kişinin yaptığını yapma; büyük sorular sor."],
+ q:{
+  prompt:"Doudna'nın RNA'ya bu kadar ilgi duymasının kitapta anlatılan en önemli bilimsel nedeni hangisidir?",
+  options:[
+   {t:"RNA'nın DNA'dan çok daha uzun ve kararlı bir molekül olması", f:"Tam tersi: RNA genelde DNA'dan daha kısa ve daha az kararlıdır. Doudna'yı çeken şey uzunluk değil, RNA'nın yapabildiği işlerin çeşitliliğiydi."},
+   {t:"RNA'nın hem bilgi taşıyabilmesi hem de ribozim olarak tepkime yürütebilmesi", f:"", c:true},
+   {t:"O yıllarda herkesin RNA üzerinde çalışıyor olması", f:"Aksine, Szostak'ın ilkesi 'Bin kişinin yaptığı bir şeyi asla yapma' idi. Doudna laboratuvarda RNA üzerinde çalışan ilk öğrenciydi; kalabalığı izlemedi."},
+   {t:"RNA'nın yalnızca virüslerde bulunması", f:"RNA her canlı hücrede vardır; DNA'daki bilgiyi proteine taşıyan haberci RNA buna örnektir. Ribozimlerin keşfi RNA'nın hücredeki rolünü daha da büyüttü."}
+  ],
+  good:"RNA hem bilgi saklayabilir hem de ribozim olarak kimyasal tepkimeleri hızlandırabilir. Bu yüzden yaşamın kökeninde olabileceği düşünülür. Doudna da 'yapı işlevi belirler' fikriyle RNA'nın şeklini çözmeye yöneldi."
+ }
+},
+{
+ id:"a2", sec:"A", chapter:"Bölüm 9 ve 10 · Kümelenmiş tekrarlar, Özgür Konuşma Hareketi Kafesi",
+ title:"CRISPR: Bakterilerin bağışıklık hafızası",
+ html:`
+<p class="lead">1990'da İspanya'da, Alicante Üniversitesi'nde doktora öğrencisi olan Francisco Mojica, tuzlu bataklıklarda yaşayan mikropları incelerken DNA'da tuhaf bir desen görür: Düzenli aralıklarla tekrar eden, tersten de aynı okunan kısa diziler. Önce bir hata yaptığını sanır.</p>
+<p>2001'de bu dizilere bir ad verilir: <strong>CRISPR</strong> (clustered regularly interspaced short palindromic repeats). Yanlarındaki genlerin ürettiği enzimlere de "CRISPR ile ilişkili" anlamında <strong>Cas</strong> enzimleri denir.</p>
+<h3>Tatilde gelen buluş</h3>
+<p>2003 yazında Mojica, Santa Pola'da tatildeyken kumsala gitmek yerine dizileri bilgisayarda karşılaştırır. Tekrarların arasındaki <strong>ara dizilerin</strong> (spacers) bakterilere saldıran virüslerin dizileriyle eşleştiğini fark eder. Ara diziyi taşıyan bakteriler o virüse karşı bağışıktır. Yani CRISPR, bakterilerin geçmişte karşılaştıkları virüslerin "sabıka fotoğraflarını" sakladığı bir bağışıklık sistemidir.</p>
+<p>Bu, gezegenin en eski savaşıdır: Bakteriler ile faj (bacteriophage) denen virüsler yaklaşık üç milyar yıldır savaşmaktadır. Mojica'nın makalesi birkaç dergiden reddedilir ve ancak 2005'te yayımlanır.</p>
+<h3>Bir telefon ve bir kafe</h3>
+<p>2006'da Berkeley'den mikrobiyolog Jillian Banfield, RNA uzmanı Doudna'yı arar ve onunla kampüsteki Özgür Konuşma Hareketi Kafesi'nde buluşur. Banfield bakterilerde CRISPR dizileri bulmaktadır; sistemin RNA ile çalıştığından şüphelenilmektedir. Doudna o güne kadar CRISPR kelimesini hiç duymamıştır, ama merakı uyanır.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>CRISPR-Cas sistemi:</strong> Bakterinin virüs DNA'sından parçaları kendi genomuna kaydettiği, sonra bu kayıtlardan üretilen RNA ile aynı virüsü tanıyıp Cas enzimleriyle kestiği uyarlanabilir bağışıklık sistemi.</div>`,
+ learn:["CRISPR, bakterilerin DNA'sındaki düzenli aralıklı, tekrar eden kısa dizilerdir; ilk kez Francisco Mojica tarafından ayrıntılı incelendi.","Ara diziler (spacers) bakterilere saldıran virüslerin dizileriyle eşleşir; CRISPR bakterinin bağışıklık hafızasıdır.","Bakteriler ile fajlar arasındaki savaş yaklaşık üç milyar yıldır sürer.","Mojica'nın makalesi birkaç kez reddedildi ve ancak 2005'te yayımlandı.","Jillian Banfield 2006'da Doudna'yı arayıp kafede buluşmasıyla Doudna CRISPR dünyasına girdi."],
+ q:{
+  prompt:"Mojica 2003'te CRISPR'ın işlevi hakkında neyi fark etti?",
+  options:[
+   {t:"Tekrar dizilerinin hücre bölünmesini kontrol ettiğini", f:"Mojica 1995'te böyle bir tahminde bulunmuştu, ama bu yanlış çıktı. 2003'teki asıl buluş ara dizilerle virüsler arasındaki eşleşmeydi."},
+   {t:"CRISPR'ın insan hücrelerinde genleri düzenlemek için hemen kullanılabileceğini", f:"Bu uygulama yaklaşık on yıl sonra, 2012-2013'te geldi. Mojica'yı yönlendiren uygulama değil, doğanın gizemine duyduğu meraktı."},
+   {t:"Ara dizilerin, bakterilere saldıran virüslerin dizileriyle eşleştiğini ve bunun bağışıklık sağladığını", f:"", c:true},
+   {t:"CRISPR dizilerinin sadece insanlarda bulunduğunu", f:"CRISPR dizileri bakterilerde ve arkelerde (tek hücreli, çekirdeksiz canlılar) bulunur. Mojica tuzlu bataklıklardaki mikropları inceliyordu."}
+  ],
+  good:"Ara diziler virüs dizileriyle eşleşiyordu ve bu diziyi taşıyan bakteriler o virüse bağışıktı. CRISPR, bakterinin uyarlanabilir bağışıklık sistemiydi. Merakla yapılan temel bilim, ileride büyük bir teknolojinin kapısını açtı."
+ }
+},
+{
+ id:"a3", sec:"B", chapter:"Bölüm 12 · Yoğurt üreticileri",
+ title:"Temel bilim ve uygulamalı bilim el ele",
+ html:`
+<p class="lead">CRISPR'ın hikâyesinde beklenmedik kahramanlar da vardır: yoğurt ve peynir üreticileri. Yoğurt ve peynir, bakteri kültürleriyle yapılır. Bu bakterileri öldüren virüsler, milyarlarca dolarlık bir sektörün en büyük tehdididir.</p>
+<p>Danimarkalı gıda şirketi Danisco'da çalışan iki genç bilim insanı, Rodolphe Barrangou ve Philippe Horvath, şirketin yıllar boyunca sakladığı bakteri arşivini inceler. 2005'te bir "Evreka" anı yaşarlar: Virüs saldırısından sağ çıkan bakteriler, o virüsten aldıkları <strong>yeni ara dizileri</strong> taşımaktadır.</p>
+<h3>Bilimden ürüne, üründen bilime</h3>
+<p>Barrangou ve Horvath, bakterilerin CRISPR bölgesine virüs dizileri ekleyerek bağışıklığı bilerek oluşturabildiklerini, <strong>Cas9</strong> gibi enzimler devre dışı kalınca direncin kaybolduğunu gösterirler. Makaleleri 2007'de Science'ta yayımlanır. Bugün CRISPR yoğurt kültürlerini korumak için kullanılmaktadır.</p>
+<p>Isaacson burada "doğrusal yenilik modeli" (linear model of innovation) fikrini tartışır: Önce temel bilim, sonra uygulama, sonra ürün. Bu modelde doğruluk payı vardır, ama süreç çoğu zaman <strong>iki yönlüdür</strong>. CRISPR'da da durum böyledir: Tuzlu bataklık mikroplarını merak eden Mojica'nın temel bilimi ile yoğurt üreticilerinin pratik sorunu birbirini besler.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Temel ve uygulamalı bilimin ortaklığı:</strong> Doğayı anlamak için yapılan araştırma ile pratik bir sorunu çözmek için yapılan araştırma birbirinden kopuk değildir; biri diğerine yeni sorular ve araçlar kazandırır.</div>`,
+ learn:["Yoğurt ve peynir kültürlerini koruma ihtiyacı CRISPR araştırmasını hızlandırdı.","Danisco'dan Barrangou ve Horvath, virüs saldırısından sağ çıkan bakterilerin yeni ara diziler kazandığını gösterdi.","Ara dizi ekleyerek bağışıklık oluşturulabildi; Cas9 devre dışı kalınca direnç kayboldu (Science, 2007).","Doğrusal yenilik modeli kısmen doğrudur; ama temel ve uygulamalı bilim genelde iki yönlü bir ilişki içindedir."],
+ q:{
+  prompt:"Yoğurt üreticilerinin hikâyesi, kitabın bilim anlayışı hakkında en çok neyi gösterir?",
+  options:[
+   {t:"Gerçek bilimin yalnızca üniversitelerde yapılabileceğini", f:"Barrangou ve Horvath bir gıda şirketinde çalışıyordu ve CRISPR'ın işleyişine dair çok önemli bir kanıt buldular. Bilim farklı yerlerde yapılabilir."},
+   {t:"Şirketlerin temel bilime hiçbir katkısı olmadığını", f:"Danisco'nun bakteri arşivi ve pratik sorunu, CRISPR'ın bağışıklık sistemi olduğunu doğrulayan kanıtı sağladı. Yani şirketin katkısı büyüktü."},
+   {t:"Temel bilim ile uygulamalı bilimin birbirini beslediğini; sürecin tek yönlü olmadığını", f:"", c:true},
+   {t:"Pratik sorunlarla uğraşmanın bilimsel merakı öldürdüğünü", f:"Tam tersine, yoğurt bakterilerini koruma sorunu CRISPR'a dair temel soruların cevaplanmasına yardım etti. Pratik bir soru merakı besleyebilir."}
+  ],
+  good:"Isaacson'a göre temel ve uygulamalı bilim bir 'çağrı ve cevap düeti' gibidir. Mojica'nın merakı ile Danisco'nun pratik sorunu birleşti; CRISPR'ın bir bağışıklık sistemi olduğu böyle kanıtlandı."
+ }
+},
+{
+ id:"a4", sec:"B", chapter:"Bölüm 16, 17 ve 18 · Charpentier, CRISPR-Cas9, Science 2012",
+ title:"Programlanabilir bir makas: CRISPR-Cas9",
+ html:`
+<p class="lead">Mart 2011'de Porto Riko'daki bir konferansta Doudna, Fransız mikrobiyolog Emmanuelle Charpentier ile tanışır. Eski San Juan'ın arnavut kaldırımlı sokaklarında yürürken Charpentier şunu söyler: Cas9'un nasıl kestiğini anlamak için bir biyokimyacıya ve yapısal biyoloğa ihtiyacı vardır. "Birlikte çalışalım."</p>
+<p>Charpentier daha önce sistemde gizli bir parça bulmuştur: <strong>tracrRNA</strong>. Doudna'nın laboratuvarından Martin Jinek ile Charpentier'in ekibinden Krzysztof Chylinski, farklı ülkelerden Skype ile çalışarak 24 saat süren bir iş birliği kurarlar.</p>
+<h3>Üç bileşen, bir makas</h3>
+<p>Deneyler şunu gösterir: Cas9'un DNA'yı kesmesi için iki RNA gereklidir. <strong>crRNA</strong> hedefi gösteren kılavuzdur; <strong>tracrRNA</strong> ise crRNA'yı Cas9'a bağlayan bir tutamaktır. Üçü birlikte olunca Cas9 hedef DNA'nın iki ipliğini birden keser.</p>
+<p>Büyük fikir şudur: Kılavuz RNA <strong>istenen herhangi bir DNA dizisine göre değiştirilebilir</strong>. Jinek ve Doudna bir adım daha atar: İki RNA'yı tek bir molekülde birleştirirler: <strong>tek kılavuz RNA</strong> (single-guide RNA). Böylece sistem çok daha kolay programlanır.</p>
+<p>Makale 8 Haziran 2012'de Science'a gönderilir ve aynı ay yayımlanır. Bilim tarihinde gerçek "Evreka" anları azdır; ama bu ona çok yakındır: Hayatın kodunu düzenlemenin kolay bir yolu bulunmuştur.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>CRISPR-Cas9:</strong> Kılavuz RNA'nın gösterdiği yerde DNA'yı kesen Cas9 enziminden oluşan, kılavuz değiştirilerek istenen gene yönlendirilebilen gen düzenleme aracı.</div>`,
+ learn:["Doudna ile Charpentier Mart 2011'de Porto Riko'da tanıştı; farklı becerileri birleştirmek için iş birliği kurdular.","Cas9'un kesmesi için crRNA (kılavuz) ve tracrRNA (tutamak) birlikte gereklidir.","Kılavuz RNA değiştirilerek Cas9 istenen herhangi bir DNA dizisine yönlendirilebilir.","Jinek ve Doudna iki RNA'yı tek kılavuz RNA'da birleştirdi; sistem kolay programlanabilir bir araç oldu.","Makale Haziran 2012'de Science'ta yayımlandı; ilk yazarlar Jinek ve Chylinski'ydi."],
+ q:{
+  prompt:"2012 makalesini bir 'gen düzenleme aracı' hâline getiren en önemli fikir hangisidir?",
+  options:[
+   {t:"Kılavuz RNA'nın değiştirilerek Cas9'un istenen herhangi bir DNA dizisine yönlendirilebilmesi", f:"", c:true},
+   {t:"Cas9'un DNA'yı rastgele yerlerden kesmesi", f:"Rastgele kesen bir enzim düzenleme aracı olamaz. CRISPR-Cas9'un gücü tam tersine çok hedefli olmasıdır: Kılavuz RNA'nın gösterdiği yeri keser."},
+   {t:"tracrRNA'nın sisteme gerekli olmadığının anlaşılması", f:"Deneyler tam tersini gösterdi: tracrRNA olmadan crRNA Cas9'a bağlanamıyor ve kesim olmuyordu. Sonra iki RNA tek kılavuzda birleştirildi."},
+   {t:"Sistemin yalnızca yoğurt bakterilerinde çalışması", f:"Makalenin önemi, sistemin her DNA dizisini hedefleyebilecek şekilde programlanabileceğini göstermesiydi; bu da başka canlılarda kullanımın yolunu açtı."}
+  ],
+  good:"CRISPR-Cas9'u devrim yapan şey programlanabilirlikti: Kılavuz RNA'yı değiştirince makas başka bir gene gider. Tek kılavuz RNA bunu daha da kolaylaştırdı."
+ }
+},
+{
+ id:"a5", sec:"B", chapter:"Bölüm 21-27 · Yarış",
+ title:"Bilim bir takım oyunu ve bir yarış",
+ html:`
+<p class="lead">2012 makalesi CRISPR'ın deney tüpünde çalıştığını gösterdi. Sıradaki büyük soru şuydu: <strong>İnsan hücrelerinde de çalışacak mı?</strong> Bu soru, kitabın en heyecanlı yarışını başlatır.</p>
+<p>Yarışın üç ana oyuncusu vardır: Broad Enstitüsü'nden genç ve hırslı <strong>Feng Zhang</strong>, Harvard'dan efsanevi genetikçi <strong>George Church</strong> ve insan hücreleriyle çalışan bir ekibi olmayan ama hızla yetişmeye çalışan <strong>Doudna</strong>.</p>
+<h3>Fotoğraf finişi</h3>
+<p>Zhang, sistemi insan hücrelerinde daha iyi çalıştırmak için kılavuz RNA'yı uzatır ve Cas9'u insan hücresine göre uyarlar. Makalesini Ekim 2012'de gönderir. Church'ün makalesi üç hafta sonra gelir; ikisi de 3 Ocak 2013'te birlikte yayımlanır. Doudna'nın makalesi 29 Ocak 2013'te çıkar; aynı ay başka ekiplerin de benzer sonuçları vardır.</p>
+<p>Isaacson'a göre bu, buluş tüpte gösterildikten sonra bu adımın neredeyse kaçınılmaz olduğunu düşündürür. Yarış daha sonra patent davalarına, şirketlere ve kırgınlıklara dönüşür.</p>
+<h3>Rekabetin iki yüzü</h3>
+<p>Doudna'ya göre sağlıklı rekabet büyük keşifleri körükler: İlk olmanın ödülleri (makale, patent, ödül, takdir) bilim insanlarını hızlandırır. Ama rekabet gizliliğe ve veri paylaşımının kısıtlanmasına da yol açabilir. Ve hiçbir büyük buluş tek kişinin eseri değildir: Öğrenciler, doktora sonrası araştırmacılar, farklı ülkelerden ortaklar hep sahnededir.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Bilimde iş birliği ve rekabet:</strong> Bilim hem ortak bir çabadır hem de ilk olma yarışıdır. Rekabet hızlandırır; ama açık paylaşım ve dürüst emek takdiri olmadan güveni zedeler.</div>`,
+ learn:["2012 sonrası yarışın sorusu: CRISPR insan hücrelerinde çalışacak mı?","Üç oyuncu: Feng Zhang (Broad), George Church (Harvard) ve Jennifer Doudna (Berkeley).","Zhang ve Church'ün makaleleri 3 Ocak 2013'te, Doudna'nınki 29 Ocak 2013'te yayımlandı.","Yarış sonradan patent davalarına ve şirket rekabetine dönüştü.","Rekabet keşfi hızlandırır ama gizlilik ve kırgınlık da doğurabilir; büyük buluşlar ekip işidir."],
+ q:{
+  prompt:"Kitaba göre bilimdeki rekabet hakkında hangisi en dengeli değerlendirmedir?",
+  options:[
+   {t:"Rekabet her zaman zararlıdır; bilim insanları hiç yarışmamalıdır", f:"Doudna'ya göre sağlıklı rekabet birçok büyük keşfi körüklemiştir. Kitap rekabeti tümden kötü görmez."},
+   {t:"Önemli olan yalnızca ilk olmaktır; kimin yardım ettiği önemsizdir", f:"Kitap boyunca öğrencilerin, doktora sonrası araştırmacıların ve ortakların emeği vurgulanır. Emeği görmezden gelmek bilimdeki güveni zedeler."},
+   {t:"Buluşlar tek bir dâhinin eseridir; ekip çalışması ikinci plandadır", f:"CRISPR hikâyesi tam tersini gösterir: Mojica'dan yoğurt bilimcilerine, Jinek ve Chylinski'den Zhang ve Church'e kadar birçok kişi ve ekip katkı yaptı."},
+   {t:"Rekabet keşfi hızlandırabilir, ama gizlilik ve kırgınlık gibi bedelleri de vardır", f:"", c:true}
+  ],
+  good:"Rekabet bilim insanlarını hızlandırır, hasta tedavisini öne çekebilir; ama gizlilik, patent kavgaları ve kırgınlık gibi bedelleri de vardır. Kitap bu iki yüzü birlikte gösterir."
+ }
+},
+{
+ id:"a6", sec:"C", chapter:"Bölüm 32 · Tedaviler",
+ title:"Somatik tedavi: Victoria Gray'in hikâyesi",
+ html:`
+<p class="lead">Temmuz 2019'da Nashville'de bir hastanede doktor Haydar Frangoul, Mississippi'den gelen 34 yaşındaki Victoria Gray'e kendi kanından alınıp CRISPR ile düzenlenmiş kök hücreleri verir. Dört çocuk annesi Gray, bebekliğinden beri ağır ağrılar çektiği orak hücre hastalığı (sickle-cell anemia) için ABD'de CRISPR ile tedavi edilen ilk kişi olur.</p>
+<h3>Orak hücre hastalığı nedir?</h3>
+<p>Hastalık, üç milyardan fazla baz çifti içinde <strong>tek bir harfteki</strong> mutasyondan kaynaklanır. Kırmızı kan hücreleri orak biçimini alır ve damarları tıkar. Doktorlar Gray'in hücrelerinde, normalde yalnızca anne karnında üretilen sağlıklı <strong>fetal hemoglobini</strong> üreten geni yeniden etkinleştirir. Haziran 2020'ye gelindiğinde Gray dokuz ay boyunca hiç ağrı krizi yaşamamıştır. "Kızlarımın gelinliklerini seçmelerine yardım etmek için orada olacağım" der.</p>
+<h3>Ex vivo ve in vivo</h3>
+<p>Bu tedavi <strong>somatik</strong> (somatic) bir düzenlemedir: Yalnızca hastanın vücut hücrelerini değiştirir ve çocuklarına geçmez. Hücreler vücut dışında düzenlenip geri verilir: <strong>ex vivo</strong>. Bir başka yol, aracı doğrudan vücuttaki hücrelere ulaştırmaktır: <strong>in vivo</strong>. Mart 2020'de Portland'da doğuştan körlüğe yol açan bir mutasyonu düzeltmek için gözün içine CRISPR enjekte edilmesi buna örnektir.</p>
+<h3>Ama kim karşılayacak?</h3>
+<p>Bu tedaviler başlangıçta hasta başına bir milyon dolar ya da daha fazlasına mal olabilir (kitabın yazıldığı dönemin tahmini). Doudna maliyeti düşürmeyi ekibinin temel hedeflerinden biri yapar; amaç tedaviyi hastanın vücudunda, kemik iliğini çıkarmadan yapabilmektir.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Somatik düzenleme:</strong> Yalnızca kişinin vücut hücrelerinde yapılan, gelecek kuşaklara aktarılmayan düzenleme. Bilimsel ve etik açıdan germ hattı düzenlemesinden çok daha az tartışmalıdır.</div>`,
+ learn:["Victoria Gray, Temmuz 2019'da ABD'de orak hücre için CRISPR ile tedavi edilen ilk kişi oldu.","Orak hücre hastalığı tek bir harflik mutasyondan kaynaklanır; tedavide fetal hemoglobin geni yeniden etkinleştirildi.","Somatik düzenleme yalnızca hastayı etkiler, çocuklara geçmez.","Ex vivo: hücreler vücut dışında düzenlenir; in vivo: düzenleme vücut içinde yapılır (ör. göz tedavisi).","Bu tedavilerin çok pahalı olması (o dönemde hasta başı yaklaşık bir milyon dolar) bir adalet sorunudur."],
+ q:{
+  prompt:"Victoria Gray'e uygulanan tedavi hangi türe girer?",
+  options:[
+   {t:"Germ hattı düzenlemesi; çünkü değişiklik çocuklarına da geçer", f:"Gray'in kan kök hücreleri düzenlendi; yumurta, sperm ya da embriyo değil. Bu yüzden değişiklik çocuklarına geçmez. Germ hattı düzenlemesi değildir."},
+   {t:"Somatik ve ex vivo düzenleme; hücreler vücut dışında düzenlenip geri verildi", f:"", c:true},
+   {t:"İyileştirme (enhancement); çünkü normal bir özellik güçlendirildi", f:"Gray'in ağır bir hastalığı vardı ve tedavi onu hastalığın acısından kurtarmayı amaçladı. Bu bir tedavidir, iyileştirme değil."},
+   {t:"Aşı; çünkü bağışıklık sistemini uyarıyor", f:"Tedavi bağışıklık sistemini uyarmadı; kan kök hücrelerinin DNA'sını değiştirerek sağlıklı hemoglobin üretilmesini sağladı."}
+  ],
+  good:"Gray'in kendi kök hücreleri vücut dışında düzenlenip geri verildi: somatik ve ex vivo bir tedavi. Değişiklik yalnızca onu etkiler, çocuklarına geçmez."
+ }
+},
+{
+ id:"a7", sec:"C", chapter:"Bölüm 37, 38 ve 39 · He Jiankui, Hong Kong zirvesi, Kabullenme",
+ title:"Germ hattı ve ilk CRISPR bebekleri",
+ html:`
+<p class="lead">Kasım 2018'de dünya şaşkın bir haberle uyanır: Çinli bilim insanı He Jiankui, embriyolarında CRISPR ile düzenleme yaptığı ikiz kızların, Lulu ve Nana'nın doğduğunu açıklar.</p>
+<h3>Ne yaptı?</h3>
+<p>He, babanın HIV pozitif olduğu çiftleri seçer ve embriyolarda HIV'in hücrelere girmek için kullandığı <strong>CCR5</strong> genini düzenler. Gerekçesi bebekleri HIV'den korumaktır. Bu bir <strong>germ hattı düzenlemesidir</strong> (germline editing): Değişiklik embriyonun tüm hücrelerine ve gelecek kuşaklara geçer.</p>
+<h3>Neden bu kadar tepki gördü?</h3>
+<ul class="clean">
+<li><strong>Tıbbi gereklilik yoktu:</strong> Babanın sperminin HIV'den arındırılması tek başına bebekleri korumak için muhtemelen yeterliydi; düzenleme bir hastalığı düzeltmiyordu.</li>
+<li><strong>Özensiz bir işti:</strong> Lulu'da genin yalnızca bir kopyası düzenlenmişti; hedef dışı (off-target) düzenleme ve <strong>mozaiklik</strong> (mosaic, bazı hücrelerin düzenlenmemiş olması) belirtileri vardı.</li>
+<li><strong>Gizlilik ve şeffaflık eksikliği:</strong> Çalışma bilim camiasından ve kamuoyundan saklandı.</li>
+<li><strong>CCR5'in başka işlevleri</strong> vardır; örneğin Batı Nil virüsüne karşı korumayla ilişkilidir.</li>
+</ul>
+<p>He, Hong Kong'daki uluslararası zirvede çalışmasını savunur; ama sonunda Çin'de mahkemeye çıkarılır ve 2019 sonunda üç yıl hapis cezası alır.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Germ hattı düzenlemesi:</strong> Yumurta, sperm ya da erken embriyoda yapılan ve kalıtsal olan düzenleme. Gelecek kuşakları etkilediği için en hassas etik çizgidir.</div>`,
+ learn:["He Jiankui 2018'de embriyolarında CCR5 geni düzenlenmiş ikizlerin (Lulu ve Nana) doğduğunu açıkladı.","Bu bir germ hattı düzenlemesiydi: Değişiklik tüm hücrelere ve gelecek kuşaklara geçer.","Eleştirilerin nedenleri: tıbbi gereklilik olmaması, özensiz sonuçlar (mozaiklik, hedef dışı etki), gizlilik.","He Jiankui 2019 sonunda Çin'de üç yıl hapis cezası aldı."],
+ q:{
+  prompt:"He Jiankui'nin deneyine yöneltilen eleştirilerden hangisi kitapta anlatılanlara UYMAZ?",
+  options:[
+   {t:"Düzenleme bebekleri ciddi bir genetik hastalıktan kurtarmak için tıbbi olarak zorunluydu", f:"", c:true},
+   {t:"Çalışma gizli yürütüldü ve bilim camiasıyla şeffaf biçimde paylaşılmadı", f:"Bu eleştiri kitapta anlatılanlara uyar: Klinik deneme kaydı bile ikizler doğduktan sonra yapıldı ve haber bir gazetecinin araştırmasıyla ortaya çıktı."},
+   {t:"Sonuçlar özensizdi; mozaiklik ve hedef dışı etki belirtileri vardı", f:"Bu da kitapta anlatılan bir eleştiridir: Lulu'da genin tek kopyası düzenlenmişti ve embriyolarda mozaiklik belirtileri vardı."},
+   {t:"Babanın spermini HIV'den arındırmak bebekleri korumak için muhtemelen yeterliydi", f:"Bu da kitapta geçen bir eleştiridir: HIV'e karşı korumanın daha güvenli yolları vardı; bu yüzden germ hattı düzenlemesine tıbbi ihtiyaç yoktu."}
+  ],
+  good:"Doğru tespit: Düzenleme tıbbi olarak zorunlu değildi. Bebeklerde ciddi bir genetik hastalık yoktu ve HIV'den korunmanın daha güvenli yolları vardı. Eleştirinin merkezinde de bu vardı."
+ }
+},
+{
+ id:"a8", sec:"D", chapter:"Bölüm 40 ve 41 · Kırmızı çizgiler, Düşünce deneyleri",
+ title:"Kırmızı çizgiler: Tedavi mi, iyileştirme mi?",
+ html:`
+<p class="lead">CRISPR bebeklerinden sonra Isaacson zor bir soruyu masaya koyar: Çizgiyi nereye çekmeliyiz? Kitap iki önemli ayrım önerir.</p>
+<h3>1. Somatik mi, germ hattı mı?</h3>
+<p>Isaacson'a göre germ hattı gerçek bir çizgidir. Bu çizginin asla aşılmaması gerekmez; ama bir <strong>yangın şeridi</strong> gibi bizi yavaşlatır ve dikkatle düşünmeye zorlar. Çünkü germ hattında yapılan bir değişiklik gelecek tüm kuşaklara geçer.</p>
+<h3>2. Tedavi mi, iyileştirme mi?</h3>
+<p>Bir başka çizgi, tehlikeli genetik bozuklukları düzelten <strong>tedaviler</strong> (treatments) ile insan yeteneklerini artırmaya yönelik <strong>iyileştirmeler</strong> (enhancements) arasındadır. Ama bu çizgi bulanıktır.</p>
+<h3>Somut vakalarla düşünmek</h3>
+<ul class="clean">
+<li><strong>Huntington hastalığı:</strong> Acımasız ve ölümcüldür; mutasyonun tek bir kopyası yeterlidir. Silinmesi, korkunç mutasyon dışında hiçbir şeyi değiştirmez. Düzenleme için en güçlü örnektir.</li>
+<li><strong>Orak hücre:</strong> Daha karmaşıktır. Genin tek kopyasını taşıyanlar sıtmaya karşı korunur. Genler birden çok rol oynayabilir.</li>
+<li><strong>David Sanchez:</strong> Orak hücre hastası bu genç, bir belgeselde hastalığın ona sabır ve olumlu bakış öğrettiğini söyler. Isaacson onunla yeniden konuştuğunda, mümkünse çocuklarının bu hastalık olmadan doğmasını isteyeceğini, ama hastalıktan öğrendiği empatiyi onlara aktarmak istediğini anlatır.</li>
+</ul>
+<p>Isaacson'ın önerisi şudur: Hemen kesin kurallar koymak yerine somut vakalar üzerinden düşünmek ve her vakada hangi değerlerin çatıştığını görmek.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Tedavi ve iyileştirme:</strong> Hastalığı düzeltmek ile normal bir özelliği güçlendirmek arasındaki ayrım. Bulanık olsa da etik tartışmada en önemli rehberlerden biridir.</div>`,
+ learn:["Isaacson'a göre germ hattı gerçek bir çizgidir: Asla aşılmaz değil ama bir yangın şeridi gibi bizi yavaşlatmalıdır.","Tedavi (hastalığı düzeltme) ile iyileştirme (yeteneği artırma) arasındaki çizgi önemli ama bulanıktır.","Huntington hastalığı, düzenleme için en güçlü örnektir: ölümcüldür ve tek kopya yeterlidir.","Orak hücre geni sıtmaya karşı koruma da sağlar; genler birden çok rol oynayabilir.","David Sanchez örneği: Hastalıklar bazen karakter ve empati de kazandırabilir; kararlar karmaşıktır."],
+ q:{
+  prompt:"Kitaptaki vakalara göre aşağıdakilerden hangisi gen düzenlemesi için en güçlü 'tedavi' örneğidir?",
+  options:[
+   {t:"Ortalama boydaki bir çocuğu 20 santim daha uzun yapmak", f:"Bu bir iyileştirmedir, tedavi değil. Kitap ayrıca herkes uzarsa kimsenin avantaj kazanmayacağını, yani boyun 'konumsal' bir iyi olduğunu hatırlatır."},
+   {t:"Bir sporcuya daha fazla kas ve dayanıklılık kazandırmak", f:"Bu da bir iyileştirme örneğidir. Kitapta sporda adalet ve doğal yetenek tartışmasıyla birlikte ele alınır; hastalık tedavisi değildir."},
+   {t:"Çocuğun göz rengini ebeveynlerin zevkine göre seçmek", f:"Göz rengi bir hastalık değildir. Bu, kitabın 'genetik süpermarket' diye eleştirdiği tercihlere örnektir."},
+   {t:"Ölümcül ve tek kopyası yeterli olan Huntington mutasyonunu silmek", f:"", c:true}
+  ],
+  good:"Huntington acımasız, ölümcül ve baskın bir hastalıktır; mutasyonun silinmesi başka hiçbir şeyi değiştirmez. Isaacson'a göre gen düzenleme için en güçlü tedavi örneğidir."
+ }
+},
+{
+ id:"a9", sec:"D", chapter:"Bölüm 42 ve 43 · Kim karar vermeli?, Doudna'nın etik yolculuğu",
+ title:"Kim karar vermeli? Özgürlük, eşitlik, çeşitlilik",
+ html:`
+<p class="lead">Diyelim ki bir gün güvenli gen düzenleme mümkün oldu. Kararı kim vermeli: Ebeveynler mi, devlet mi, bilim insanları mı?</p>
+<h3>Genetik süpermarket</h3>
+<p>Isaacson bir düşünce deneyi yapar: Bir doğurganlık kliniğinde, bir süpermarketteki gibi, çocuğunuz için satın alabileceğiniz özelliklerin listesine bakıyorsunuz. Huntington'ı ve orak hücreyi elbette silersiniz. Peki ya boy, kas, zekâ? Herkes aynı seçimleri yaparsa toplumun <strong>çeşitliliği</strong> azalır. Üstelik zenginler çocukları için en iyi genleri satın alabilirse <strong>eşitsizlik</strong> genlerimize yazılabilir.</p>
+<h3>Mutlak ve konumsal iyi</h3>
+<p>Boy gibi bazı özellikler <strong>konumsal</strong> (positional) iyilerdir: Herkes uzarsa kimse avantaj kazanmaz. Virüslere karşı direnç ise <strong>mutlak</strong> (absolute) bir iyidir: Herkes için gerçekten iyidir.</p>
+<h3>Tanrı'yı oynamak mı?</h3>
+<p>Filozof Michael Sandel'e göre yeteneklerimizi tamamen tasarlamaya kalkarsak hayatı bir <strong>armağan</strong> olarak görmeyi bırakırız; bu da daha şanssız insanlara duyduğumuz dayanışmayı zayıflatabilir. Isaacson her şeye boyun eğmemiz gerektiğini düşünmez; ama alçakgönüllülük ister.</p>
+<h3>Doudna'nın yolculuğu</h3>
+<p>Doudna başta germ hattı düzenlemesine içgüdüsel olarak karşıdır. Genetik hastalığı olan çocukların aileleriyle tanıştıkça görüşü değişir. Ölçütü <strong>tıbbi gerekliliktir</strong>; "iyileştirme" için kullanılmasını ahlaki ve toplumsal olarak yanlış bulur. "Bilim geriye gitmez; bu bilgiyi unutamayız. O yüzden ihtiyatlı bir ilerleme yolu bulmalıyız."</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>İhtiyatlı ilerleme:</strong> Bilgiyi yasaklamak ya da her şeyi piyasaya bırakmak yerine, tıbbi gereklilik, eşitlik ve çeşitlilik gibi ölçütlerle adım adım ve şeffaf ilerlemek.</div>`,
+ learn:["'Genetik süpermarket' düşünce deneyi: Kararları tamamen bireysel tercihe bırakmak çeşitliliği azaltabilir ve eşitsizliği genlere yazabilir.","Konumsal iyi (boy) herkes sahip olunca avantajını kaybeder; mutlak iyi (virüs direnci) herkes için gerçek bir kazançtır.","Sandel: Yeteneklerimizi tasarlamak hayatı bir armağan olarak görmemizi ve dayanışmayı zayıflatabilir.","Doudna'nın ölçütü tıbbi gerekliliktir; ihtiyatlı bir ilerleme yolu savunur."],
+ q:{
+  prompt:"Kitaba göre gen düzenleme kararlarını tamamen serbest piyasaya ('genetik süpermarket') bırakmanın en büyük riski nedir?",
+  options:[
+   {t:"Gen düzenlemenin daha ucuz hâle gelmesi", f:"Ucuzlama kendi başına bir risk değil; tersine erişimi artırabilir. Kitabın kaygısı, en iyi genleri yalnızca zenginlerin satın alabilmesi ve herkesin aynı seçimleri yapmasıdır."},
+   {t:"Eşitsizliğin genlere yazılması ve toplumdaki çeşitliliğin azalması", f:"", c:true},
+   {t:"Bilim insanlarının araştırma yapmaktan vazgeçmesi", f:"Kitapta böyle bir risk öne çıkmaz. Asıl kaygılar eşitsizlik ve çeşitliliğin kaybıdır."},
+   {t:"Hastalıkların tedavisinin tamamen yasaklanması", f:"Serbest piyasa tedaviyi yasaklamaz; tam tersine her şeye izin verir. Risk, iyileştirmelerin parayla satın alınabilmesi ve toplumun tekdüzeleşmesidir."}
+  ],
+  good:"Zenginlerin en iyi genleri satın alabilmesi eşitsizliği kalıcı hâle getirebilir, herkesin benzer seçimler yapması da çeşitliliği azaltır. Bu yüzden kitap tamamen serbest bir 'genetik süpermarkete' karşı uyarır."
+ }
+},
+{
+ id:"a10", sec:"D", chapter:"Bölüm 51, 52 ve 53 · Mammoth ve Sherlock, Testler, Aşılar",
+ title:"CRISPR ve COVID: Merakın meyvesi",
+ html:`
+<p class="lead">Mart 2020'de koronavirüs pandemisi başlayınca CRISPR hikâyesi beklenmedik bir yere varır. Bakterilerin virüslere karşı geliştirdiği savunma sistemi, insanların bir virüsle savaşında kullanılmaya başlanır.</p>
+<h3>Hızlı testler: Cas12 ve Cas13</h3>
+<p>Doudna'nın öğrencileri Janice Chen ve Lucas Harrington, <strong>Cas12</strong> enziminin tuhaf bir özelliğini keşfetmişti: Hedefini bulunca çevresindeki DNA'ları gelişigüzel kesiyordu. Bunu ışıldayan bir "raportör" molekülle birleştirerek bir tespit aracı (DETECTR) yaptılar ve Mammoth Biosciences'ı kurdular. Feng Zhang da RNA'yı hedefleyen <strong>Cas13</strong> ile SHERLOCK testini geliştirmişti. 2020'de iki ekip de testlerini koronavirüse uyarladı ve protokollerini herkesle ücretsiz paylaştı. Hedef, gebelik testi gibi evde kullanılabilen ucuz ve hızlı testlerdi.</p>
+<h3>RNA aşıları</h3>
+<p>Kitabın yıldız molekülü RNA, aşılarda da sahnededir. Haberci RNA (mRNA) aşıları, hücrelere virüsün yüzeyindeki <strong>diken proteininin</strong> (spike protein) bir parçasını yapma talimatı verir; bağışıklık sistemi de bu proteini tanımayı öğrenir. Uğur Şahin ve Özlem Türeci'nin kurduğu BioNTech (Pfizer ile) ve Moderna, bir yıl içinde büyük klinik deneylerde yüzde 90'dan fazla etkili bulunan aşılar geliştirdi (2020 verileri).</p>
+<h3>Neden mümkün oldu?</h3>
+<p>Bu hızlı zafer, onlarca yıllık <strong>merak güdümlü temel araştırmaya</strong> dayanır: Genlerin RNA'ya nasıl kopyalandığını ve bakterilerin virüslerle nasıl savaştığını anlamaya çalışan bilim insanlarının çalışmalarına.</p>
+<div class="concept"><b class="t">Ana kavram</b><strong>Temel bilimin beklenmedik meyveleri:</strong> Bakterilerdeki tuhaf DNA tekrarlarını ya da RNA'nın işleyişini merak etmek, yıllar sonra pandemide test ve aşı olarak insanlığın imdadına yetişti.</div>`,
+ learn:["Cas12 (DNA) ve Cas13 (RNA) hedefini bulunca çevredeki molekülleri gelişigüzel keser; bu özellik tespit testlerinde kullanıldı.","Mammoth (DETECTR) ve Zhang'ın ekibi (SHERLOCK) koronavirüs testlerini 2020'de ücretsiz paylaştı.","mRNA aşıları hücrelere diken proteininin bir parçasını yapma talimatı verir.","BioNTech (Uğur Şahin, Özlem Türeci) ve Moderna'nın aşıları yüzde 90'dan fazla etkili bulundu (2020).","Bu başarılar onlarca yıllık merak güdümlü temel araştırmaya dayanır."],
+ q:{
+  prompt:"Mammoth ve Sherlock'un CRISPR temelli testleri hangi özelliğe dayanır?",
+  options:[
+   {t:"Cas enzimlerinin insan genomunu kalıcı olarak değiştirmesine", f:"Testler kimsenin genomunu değiştirmez. Örnekteki virüs genetik materyalini tanıyıp bir sinyal üretmek için Cas enzimlerini kullanır."},
+   {t:"Virüsün bağışıklık sistemini uyarmasına", f:"Bağışıklık sistemini uyarmak aşıların işidir. Testler, Cas12 ya da Cas13'ün hedefini tanıyınca başlattığı kesim tepkimesine dayanır."},
+   {t:"Cas12 ve Cas13'ün hedefini bulunca çevredeki DNA ya da RNA'ları kesmesine ve böylece ışıldayan raportörleri açığa çıkarmasına", f:"", c:true},
+   {t:"Virüsün diken proteinini hücrelere ürettirmesine", f:"Bu, mRNA aşılarının çalışma biçimidir. Testler ise virüsün genetik dizisini tanıyan Cas enzimlerinin kesim davranışını kullanır."}
+  ],
+  good:"Cas12 ve Cas13 hedef diziyi bulunca çevredeki DNA ya da RNA'yı gelişigüzel keser. Ortama konan ışıldayan raportörler de kesilip sinyal verir. Başta 'tuhaf' görünen bir özellik, hızlı virüs testlerinin temeli oldu."
+ }
+}
+];
+
+const PART2 = [
+{
+ id:"b1", chapter:"Bölüm 2, 3 ve 5 · Gen, DNA, İnsan genomu",
+ title:"Çift sarmalın hikâyesi ve Rosalind Franklin",
+ html:`
+<p class="bridge">Birinci kısımda gördüğün üzere Doudna'nın yolu Çift Sarmal kitabıyla başladı. Şimdi o kitabın anlattığı hikâyeye ve öncesine bakalım.</p>
+<p class="lead">Genetiğin hikâyesi Darwin ile başlar. 1835'te Galápagos Adaları'nda farklı gagalara sahip ispinozları gören Darwin, doğal seçilim (natural selection) fikrine ulaşır. Ama kalıtımın nasıl işlediğini bilmez.</p>
+<p>Cevap, Brno'daki bir manastırda bezelye yetiştiren keşiş Gregor Mendel'den gelir. Mendel baskın (dominant) ve çekinik (recessive) özellikleri keşfeder; 1866'daki makalesi 1900'e kadar neredeyse hiç fark edilmez. Isaacson'a göre bilimin ilerlemesi için buluşun duyulması da gerekir.</p>
+<h3>DNA'nın yapısı</h3>
+<p>1944'te Oswald Avery genetik bilginin DNA'da olduğunu gösterir. 1950'lerin başında Cambridge'de James Watson ve Francis Crick, Caltech'ten Linus Pauling ile yarışarak DNA'nın yapısını çözmeye çalışır. Londra'da, King's College'da kristalograf <strong>Rosalind Franklin</strong> çok net X-ışını görüntüleri çekmektedir. Maurice Wilkins, Franklin'in izni olmadan "Fotoğraf 51"i Watson'a gösterir; görüntüdeki X deseni bir sarmalı işaret eder.</p>
+<p>Watson ve Crick, adeninin timinle, guaninin sitozinle eşleştiği çift sarmal modelini 1953'te yayımlar: İki iplik ayrılınca her biri eşini yeniden kurar; molekül kendini kopyalayabilir. 1962 Nobel Ödülü Watson, Crick ve Wilkins'e verilir. Franklin 1958'de, 37 yaşında ölmüştür.</p>
+<h3>Genomu okumak</h3>
+<p>1990'da başlayan İnsan Genomu Projesi, üç milyar baz çiftini dizilemeyi amaçlar. Proje, Craig Venter'in şirketi Celera ile bir yarışa dönüşür ve 2000'de Beyaz Saray'da ilk sonuçlar birlikte açıklanır. Doudna'nın sorusu ise başkadır: Genleri okumak önemli, ama onları <strong>anlamak ve yazabilmek</strong> asıl hedeftir.</p>`,
+ q:{
+  prompt:"Rosalind Franklin'in DNA'nın yapısının keşfindeki rolü hakkında hangisi doğrudur?",
+  options:[
+   {t:"Watson ve Crick'le birlikte 1962 Nobel Ödülü'nü aldı", f:"Franklin 1958'de öldü; 1962 Nobel Ödülü Watson, Crick ve Wilkins'e verildi."},
+   {t:"Çektiği X-ışını görüntüsü (Fotoğraf 51) onun izni olmadan Watson'a gösterildi ve sarmal yapıya işaret etti", f:"", c:true},
+   {t:"DNA'nın yapısıyla hiç ilgilenmedi; yalnızca proteinler üzerinde çalıştı", f:"Franklin King's College'da DNA kristallerinin çok net X-ışını görüntülerini çekiyordu ve yapıyı bulmaya yakındı."}
+  ],
+  good:"Doğru. Fotoğraf 51, Franklin'in izni olmadan Watson'a gösterildi ve sarmal yapının kanıtı oldu. Kitap bu haksızlığı ve bilimde kadınların emeğinin görünmez kılınmasını sık sık hatırlatır."
+ }
+},
+{
+ id:"b2", chapter:"Bölüm 4, 7, 8, 13 ve 15 · Eğitim, Kıvrımlar, Berkeley, Genentech, Caribou",
+ title:"Bir bilim insanının yolu: Laboratuvardan şirkete",
+ html:`
+<p class="lead">Lisede bir danışman ona "Kızlar bilim insanı olmaz" der; Doudna yine de kimya okumaya karar verir. Pomona Koleji'nde ilk yıl özgüveni sarsılır ve bölümünü Fransızcaya çevirmeyi düşünür; ama Fransızca öğretmeni bile ona kimyada kalmasını önerir. Sonra Harvard'da Szostak'ın yanında RNA çalışır.</p>
+<p>Yale'de ekibiyle bir ribozimin üç boyutlu yapısını çözer. Babası Martin melanomdan ölmeden önce yatağında onun çalışmasını merakla dinler ve sorar: "Bu neden önemli?" Sonra Berkeley'e geçer ve RNA girişimi (RNA interference) üzerinde çalışır; bu uzmanlık onu CRISPR'a götürecektir.</p>
+<h3>Bir sapma: Genentech</h3>
+<p>Doudna 2008'de buluşlarının insanlara doğrudan etkisini görmek ister ve ilk biyoteknoloji şirketlerinden Genentech'e geçer. Ama birkaç hafta içinde akademideki özgürlüğü ve öğrencilerini özlediğini fark eder, uykusuzluk ve mutsuzluk yaşar; kısa süre sonra Berkeley'e döner. Yanlış bir karardan dönmek de bir beceridir.</p>
+<h3>Caribou ve "üçgen"</h3>
+<p>Doudna ile öğrencisi Rachel Haurwitz 2011'de Caribou Biosciences'ı kurar; o dönemde yatırımcı bulmak zordur, aile ve arkadaşlardan para toplarlar. Isaacson, Amerika'nın yenilik motorunun devlet, üniversite ve şirketlerden oluşan bir <strong>üçgen</strong> olduğunu hatırlatır: Örneğin NIH'nin fonları ve Gates Vakfı'nın hibeleri bu şirketi ilk yıllarında ayakta tutar.</p>
+<p>Sonraki yıllarda CRISPR şirketleri çoğalır: Editas Medicine (Doudna kısa süre sonra ayrılır), Intellia Therapeutics ve Charpentier'in de kurucuları arasında olduğu CRISPR Therapeutics. Temel bilim ile ticaret arasındaki çizgi incelir.</p>`,
+ q:{
+  prompt:"Isaacson'ın anlattığı yenilik 'üçgeni' hangi taraflardan oluşur?",
+  options:[
+   {t:"Devlet, üniversiteler ve şirketler", f:"", c:true},
+   {t:"Yalnızca büyük ilaç şirketleri", f:"Isaacson'a göre yenilik tek bir aktörden gelmez. Caribou örneğinde devlet fonları, üniversite ve şirket birlikte çalıştı."},
+   {t:"Patent avukatları, gazeteciler ve yatırımcılar", f:"Bu kişiler hikâyede rol oynar, ama Vannevar Bush'tan beri anlatılan yenilik üçgeni devlet, akademi ve iş dünyasıdır."}
+  ],
+  good:"Doğru. Devlet araştırmayı fonlar, üniversiteler keşfeder, şirketler ürüne dönüştürür. Caribou'nun ilk yıllarındaki NIH fonu bunun somut bir örneğidir."
+ }
+},
+{
+ id:"b3", chapter:"Bölüm 28-31 · Şirketler, Dostum, CRISPR'ın kahramanları, Patentler",
+ title:"Ün, ödül ve patent kavgaları",
+ html:`
+<p class="lead">CRISPR'ın büyüklüğü anlaşılınca yarış laboratuvardan mahkemeye ve medyaya taşındı.</p>
+<h3>Patentler</h3>
+<p>Doudna ve Charpentier'in ekibi Mayıs 2012'de patent başvurusu yapar. Zhang ve Broad Enstitüsü Aralık 2012'de, insan hücrelerinde kullanımı tanımlayan başvurularını hızlandırılmış incelemeyle yapar ve Nisan 2014'te patentini önce alır. Bunun üzerine "çakışma davası" (interference proceeding) başlar. Şubat 2017'de patent hakimleri Broad'dan yana karar verir: Buluşu insan hücrelerine taşımanın "aşikâr" (obvious) olmadığını kabul ederler. Dava sonraki yıllarda da sürer (kitabın yazıldığı dönemde hâlâ bitmemişti).</p>
+<h3>Ödüller ve kırgınlıklar</h3>
+<p>Nobel en fazla üç kişiye verilir; büyük keşifler ise onlarca kişinin emeğidir. Doudna ve Charpentier 2014'te Atılım Ödülü'nü (Breakthrough Prize) kazanır. Bu süreçte iki bilim insanı arasındaki dostluk soğur: Charpentier temel bakteri araştırmasına dönmek ister; tanınma konusunda da hassasiyetleri farklıdır.</p>
+<h3>"CRISPR'ın Kahramanları"</h3>
+<p>Ocak 2016'da Broad'ın direktörü Eric Lander, Cell dergisinde "The Heroes of CRISPR" başlıklı bir makale yayımlar. Makale Mojica'dan Šikšnys'e birçok kişiyi över ama Doudna'nın rolünü küçültür ve Lander'ın kendi enstitüsündeki Zhang'ın katkısını öne çıkarır. Özellikle kadın bilim insanlarından sert tepki gelir; birçok kişi Rosalind Franklin'e yapılan haksızlığı hatırlar.</p>
+<p>Isaacson'ın gözlemi: Patentler insanları kredi paylaşmakta daha az cömert yapabilir. Örneğin Zhang'a Cas9'a odaklanmasında yardım eden Luciano Marraffini sonradan ana patent başvurusundan çıkarılır.</p>`,
+ q:{
+  prompt:"Kitaba göre patent ve ödül yarışının bilim üzerindeki olumsuz etkilerinden biri hangisidir?",
+  options:[
+   {t:"Bilim insanlarını daha açık ve cömert paylaşıma itmesi", f:"Kitap tam tersini anlatır: Patent rekabeti gizliliği artırdı ve krediyi paylaşmayı zorlaştırdı. Açık paylaşım daha çok pandemi döneminde öne çıktı."},
+   {t:"Hiçbir şirketin kurulmamasına yol açması", f:"Aksine birçok CRISPR şirketi kuruldu (Caribou, Editas, Intellia, CRISPR Therapeutics). Sorun şirketlerin varlığı değil, kredi ve mülkiyet kavgalarıydı."},
+   {t:"Krediyi paylaşmayı zorlaştırması ve kişiler arasında kırgınlık yaratması", f:"", c:true}
+  ],
+  good:"Doğru. Marraffini'nin patent başvurusundan çıkarılması, 'CRISPR'ın Kahramanları' tartışması ve Doudna-Charpentier dostluğunun soğuması bunun örnekleridir."
+ }
+},
+{
+ id:"b4", chapter:"Bölüm 33 ve 34 · Biyohacking, DARPA ve Anti-CRISPR",
+ title:"Garajdaki biyologlar ve biyogüvenlik",
+ html:`
+<p class="lead">2017'de San Francisco'daki bir konferansta biyohacker Josiah Zayner, garajında hazırladığı 299 dolarlık bir "kurbağa genetik mühendisliği kiti"ni tanıtır ve sahnede kendi koluna kas büyümesini durduran miyostatin genini hedefleyen bir CRISPR karışımı enjekte eder.</p>
+<p>Zayner, Chicago Üniversitesi'nde moleküler biyofizik doktorası yapmış, NASA'da çalışmış biridir. Amacı biyolojiyi yurttaş bilimiyle (citizen science) <strong>demokratikleştirmektir</strong>. Isaacson onu biraz Shakespeare'in yaramaz cini Puck'a benzetir: Hem kural tanımaz hem de düşündürücü.</p>
+<h3>Biyogüvenlik</h3>
+<p>CRISPR'ın ucuz ve kolay olması tehlike de demektir. 2016'da ABD istihbaratı "genom düzenleme"yi olası kitle imha silahları listesine ekler. Pentagon'un araştırma kurumu DARPA, genetik silahlara karşı savunma için <strong>Güvenli Genler</strong> (Safe Genes) programını başlatır ve CRISPR araştırmalarının en büyük fon kaynaklarından biri olur.</p>
+<h3>Anti-CRISPR</h3>
+<p>Bakteriler ile virüsler arasındaki silahlanma yarışının bir sonraki hamlesi de keşfedilir: Bazı virüsler, bakterinin CRISPR sistemini sabote eden <strong>anti-CRISPR</strong> proteinleri üretir. Joe Bondy-Denomy'nin keşfettiği bu proteinler, gerektiğinde CRISPR düzenlemesini durdurmak için bir "fren" olarak kullanılabilir.</p>`,
+ q:{
+  prompt:"Anti-CRISPR proteinleri neden önemlidir?",
+  options:[
+   {t:"CRISPR düzenlemesini durdurabilen ya da ayarlayabilen bir fren işlevi görebildikleri için", f:"", c:true},
+   {t:"CRISPR'ı daha hızlı kestirdikleri için", f:"Anti-CRISPR'lar adı üstünde CRISPR'a karşı çalışır; virüsler onları bakterinin CRISPR savunmasını sabote etmek için kullanır."},
+   {t:"İnsanlarda kas gelişimini artırdıkları için", f:"Bu, Zayner'in miyostatin deneyiyle ilgili bir karışıklık. Anti-CRISPR'lar kas büyümesiyle değil, CRISPR sistemini durdurmakla ilgilidir."}
+  ],
+  good:"Doğru. Virüslerin bakterilere karşı geliştirdiği bu proteinler, insan hücrelerinde CRISPR'ı durdurmak ya da kontrol altında tutmak için kullanılabilir; biyogüvenlik açısından değerli bir araçtır."
+ }
+},
+{
+ id:"b5", chapter:"Bölüm 35, 36, 38 ve 39 · Yolun kuralları, Doudna sahneye çıkıyor, Hong Kong, Kabullenme",
+ title:"Kuralları kim, nasıl yazar?",
+ html:`
+<p class="lead">Yeni bir biyoteknolojinin kurallarını belirleme çabası CRISPR'dan çok önce başladı.</p>
+<h3>Asilomar, 1975</h3>
+<p>Rekombinant DNA tekniğinin bulunmasından sonra Paul Berg ve David Baltimore gibi bilim insanları 1975'te Kaliforniya'daki Asilomar'da toplanır ve güvenlik kuralları belirlenene kadar bazı deneylere ara verilmesine karar verir. Asilomar, bilim insanlarının kendi alanlarını sorumlulukla düzenlemesinin sembolü olur.</p>
+<h3>Hayal kırıklıkları ve uyarılar</h3>
+<p><em>Gattaca</em> filmi, genetik olarak seçilmiş insanların ayrıcalıklı olduğu bir dünyayı anlatır. 1999'da 18 yaşındaki Jesse Gelsinger bir gen tedavisi denemesinde ölür ve alan yıllarca durgunlaşır.</p>
+<h3>Doudna'nın kâbusu ve Napa</h3>
+<p>2014'te Doudna, kendisinden gen düzenlemeyi öğrenmek isteyen Hitler'i gördüğü bir kâbus görür. Bundan sonra politika tartışmalarına girmeye karar verir: Ocak 2015'te Napa'da bir toplantı düzenler ve Aralık 2015'te Washington'da ilk Uluslararası İnsan Gen Düzenleme Zirvesi yapılır. Sonuç: Germ hattı düzenlemesinden katı koşullar sağlanana kadar kaçınılmalı, ama kalıcı bir yasak konmamalıdır.</p>
+<h3>He Jiankui'den sonra</h3>
+<p>2018 Hong Kong zirvesinde He Jiankui'nin açıklamaları organizatörleri sarsar. Sonrasında "moratoryum" kelimesi tartışılır: Eric Lander, Feng Zhang ve Charpentier küresel moratoryum çağrısı yaparken Doudna daha esnek bir yol, sıkı kurallarla ilerlemeyi savunur.</p>`,
+ q:{
+  prompt:"Asilomar konferansı (1975) bugün neyin sembolü olarak anılır?",
+  options:[
+   {t:"Gen düzenlemenin tamamen ve kalıcı olarak yasaklanmasının", f:"Asilomar kalıcı bir yasak getirmedi; güvenlik kuralları belirlenene kadar geçici bir ara verdi ve sonra araştırma kurallar çerçevesinde sürdü."},
+   {t:"Bilim insanlarının yeni bir teknolojiyi sorumlulukla, kendi aralarında düzenlemeye çalışmasının", f:"", c:true},
+   {t:"Bir şirketin CRISPR patentini kazanmasının", f:"Asilomar 1975'te, CRISPR'dan onlarca yıl önce, rekombinant DNA tekniği üzerine yapıldı; patentle ilgisi yoktur."}
+  ],
+  good:"Doğru. Asilomar, bilim insanlarının riskleri tartışıp kurallar belirlediği bir öz düzenleme örneğidir. Doudna da Napa toplantısında bu modeli örnek aldı ve buna etik soruları ekledi."
+ }
+},
+{
+ id:"b6", chapter:"Bölüm 41 · Düşünce deneyleri",
+ title:"Düşünce deneyleri: Sağırlık, spor, boy, zekâ",
+ html:`
+<p class="bridge">Birinci kısımda Huntington ve orak hücre örnekleriyle tedavi ile iyileştirme ayrımını gördün. Kitap başka zor vakaları da tartışır.</p>
+<h3>Sağırlık ve tersine çevirme testi</h3>
+<p>İkisi de sağır olan bir çift, sağırlığı kimliklerinin parçası olarak görür ve sağır bir sperm donörü seçerek sağır bir çocuk sahibi olur. Kimi kınar, sağır topluluğu alkışlar. Filozof Michael Sandel'in <strong>tersine çevirme testi</strong> (reversal test) yardımcı olur: Sağır doğacak bir çocuğu duyar hâle getirmek doğal görünür; duyacak bir çocuğu sağır yapmak ise çoğumuzu irkiltir.</p>
+<h3>Kaslar ve spor</h3>
+<p>Olimpiyat şampiyonu kayakçı Eero Mäntyranta dopingle suçlanır; ama kırmızı kan hücresi sayısını yüzde 25'ten fazla artıran doğal bir mutasyon taşıdığı anlaşılır. Doğanın genetik piyangosu da adil değildir: Neredeyse her şampiyon koşucu ACTN3 geninin belirli bir varyantını taşır.</p>
+<h3>Boy: konumsal iyi</h3>
+<p>Herkes 20 santim uzarsa kimse daha iyi görmez; boy <strong>konumsal</strong> (positional) bir iyidir. Virüslere karşı direnç ise herkes için <strong>mutlak</strong> (absolute) bir iyidir.</p>
+<h3>Ruh hâli ve zekâ</h3>
+<p>Ağır psikolojik hastalıklar acı verir; ama Nancy Andreasen'in otuz önemli yazar üzerinde yaptığı çalışmada yirmi dördünün ağır depresyon ya da duygu durum bozukluğu yaşadığı görülmüştür. Filozof Robert Nozick'in "deneyim makinesi" (experience machine) bize hep mutlu hissettirseydi ona bağlanır mıydık? Çoğumuz hayır deriz: İyi bir hayatın daha derin amaçları vardır.</p>`,
+ q:{
+  prompt:"Kitaptaki 'konumsal iyi' kavramına en iyi örnek hangisidir?",
+  options:[
+   {t:"Virüslere karşı direnç", f:"Virüs direnci herkes sahip olsa bile herkes için gerçek bir kazançtır; bu yüzden kitapta 'mutlak iyi' örneğidir."},
+   {t:"Huntington hastalığından kurtulmak", f:"Bu bir hastalığın tedavisidir ve herkes için mutlak bir kazançtır; başkalarıyla kıyaslamaya bağlı değildir."},
+   {t:"Boy uzunluğu; herkes uzarsa kimse avantaj kazanmaz", f:"", c:true}
+  ],
+  good:"Doğru. Boyun avantajı başkalarından uzun olmaya bağlıdır; herkes uzarsa kazanç kaybolur. Bu yüzden boy konumsal bir iyidir."
+ }
+},
+{
+ id:"b7", chapter:"Bölüm 44-47 · Quebec, Gen düzenlemeyi öğreniyorum, Watson'a yeniden bakış, Doudna'nın ziyareti",
+ title:"Cepheden notlar: Laboratuvarda bir gün ve Watson",
+ html:`
+<p class="lead">Isaacson bu bölümlerde kendisi sahneye çıkar.</p>
+<h3>Quebec, 2019</h3>
+<p>CRISPR konferansında Sam Sternberg'in "zıplayan genler" (jumping genes) makalesi Nature'a önce gönderilmiştir, ama Zhang'ın benzer makalesi Science'ta birkaç gün önce çıkar. Rekabet sürer. Akşam yemeğinde Zhang, iyileştirmelere neden karşı olduğu sorusuna uzun bir sessizlikten sonra "Doğayla oynamak; çeşitliliği azaltabilirsin" diye cevap verir. Masadakilerin ortak kaygısı eşitsizliktir.</p>
+<h3>Isaacson gen düzenliyor</h3>
+<p>Doudna'nın laboratuvarında doktora sonrası araştırmacı Gavin Knott ile deney tüpünde DNA keser ve sonucu jel elektroforeziyle (electrophoresis) görür. Jennifer Hamilton ile bir insan hücresinde gen düzenler: Düzenlenen hücreler floresan mikroskopta yeşil parlar. Isaacson sürecin, laboratuvar becerisi olan biri için ne kadar kolay olabileceğini görür.</p>
+<h3>Watson ve "mozaik" insanlar</h3>
+<p>DNA'nın çift sarmalının kâşiflerinden James Watson, ırk ve zekâ hakkındaki bilimsel temeli olmayan sözleri yüzünden Cold Spring Harbor Laboratuvarı'ndaki unvanlarını kaybeder. Şizofreni hastası oğlu Rufus, babasının sözlerinin "genetik kader hakkındaki dar bir yorumu" yansıttığını söyler. Doudna Watson'ı ziyaret ettikten sonra şöyle der: İnsanlar siyah-beyaz değildir; biyolojideki bir terimle <strong>mozaiktir</strong> (mosaic). Büyük katkıları takdir edip yanlış görüşleri açıkça reddedebiliriz.</p>`,
+ q:{
+  prompt:"Doudna, Watson'ı ziyaretinden sonra insanları anlatmak için biyolojiden hangi kavramı benimser?",
+  options:[
+   {t:"Mozaik: Herkesin hem çok iyi hem de kusurlu yanları bir arada bulunur", f:"", c:true},
+   {t:"Klon: İnsanlar ailelerinin aynısıdır", f:"Doudna tam tersine insanları basit kalıplarla yargılamaktan kaçınır. Rufus'un da belirttiği gibi genetik kader görüşü dar bir yorumdur."},
+   {t:"Baskın gen: İnsanın tek bir özelliği diğer her şeyi belirler", f:"Doudna bir kişinin tek bir yanına bakarak yargıya varmak istemez; tersine karmaşıklığı görmeye çalışır."}
+  ],
+  good:"Doğru. Doudna babasının insanları iyi ve kötü diye ayırmasına tepki olarak onları tüm karmaşıklıklarıyla görmeye çalışır. Watson'ın bilime katkısını takdir eder, ama görüşlerini 'son derece itici' bulur."
+ }
+},
+{
+ id:"b8", chapter:"Bölüm 48, 49, 50 ve 54 · Silah başına, Test, Berkeley laboratuvarı, CRISPR tedavileri",
+ title:"Pandemide bilim seferberliği",
+ html:`
+<p class="lead">13 Mart 2020'de Doudna, Berkeley'deki Yenilikçi Genomik Enstitüsü'nde (IGI) bir toplantı çağırır. Profesör Robert Tjian işi netleştirir: Önce acil yangını söndürmek, yani test yapmak gerekir; yenilikler sonra.</p>
+<h3>Amerika'nın test başarısızlığı</h3>
+<p>ABD'de CDC'nin ilk test kitlerinde bir kimyasal üretim sırasında kirlenmiştir ve kitler hatalı sonuç verir. Washington Üniversitesi'nden Alex Greninger kendi testini iki haftada geliştirir, ama izin için yaklaşık yüz saat form doldurur ve FDA başvurunun bir kopyasını CD ile postalamasını ister. Sonunda kurallar gevşetilir ve üniversite laboratuvarları devreye girer.</p>
+<h3>Gönüllü ordusu</h3>
+<p>IGI'nin gönüllü çağrısına iki günde 860'tan fazla kişi yanıt verir. Fyodor Urnov, Jennifer Hamilton ve Enrique Lin Shiao birkaç haftada otomatik bir test laboratuvarı kurar; 6 Nisan'da itfaiyeden ilk örnekler gelir. Bir gün kapıda bir not bulurlar: "Teşekkürler IGI! Berkeley ve dünya halkı."</p>
+<h3>Virüsü doğrudan yok etmek</h3>
+<p>Uzun vadeli hedef bakterilerin yaptığını yapmaktır: Virüsün genetik materyalini CRISPR ile doğramak. Cameron Myhrvold'un <strong>CARVER</strong> ve Stanley Qi'nin <strong>PAC-MAN</strong> sistemleri RNA'yı kesen Cas13'ü kullanır; PAC-MAN laboratuvarda sentetik koronavirüs parçalarını yüzde 90 azaltır. Asıl zorluk <strong>teslimattır</strong>: Enzimi akciğer hücrelerine nasıl ulaştıracağız?</p>`,
+ q:{
+  prompt:"CARVER ve PAC-MAN gibi CRISPR tedavilerinin 2021'de hâlâ insanlarda kullanılamamasının ana nedeni neydi?",
+  options:[
+   {t:"Cas13'ün RNA'yı kesememesi", f:"Laboratuvar deneylerinde Cas13 virüs RNA'sını başarıyla kesti; PAC-MAN sentetik koronavirüs parçalarını yüzde 90 azalttı."},
+   {t:"Enzimi hastanın doğru hücrelerine, özellikle akciğer hücrelerine ulaştırmanın (teslimat) zor olması", f:"", c:true},
+   {t:"Hiçbir bilim insanının bu konuyla ilgilenmemesi", f:"Tersine Myhrvold, Qi, Hsu, Wilson ve diğerleri yoğun biçimde çalıştı; DARPA da fon sağladı. Sorun ilgisizlik değil teslimattı."}
+  ],
+  good:"Doğru. Teslimat gen tedavisinin kilit sorunudur. Lipitoid gibi sentetik taşıyıcılar ya da burun spreyi gibi yöntemler üzerinde çalışılıyordu."
+ }
+},
+{
+ id:"b9", chapter:"Bölüm 55, 56 ve Sonsöz · Sanal Cold Spring Harbor, Nobel Ödülü, Royal Street",
+ title:"Nobel, yeni araçlar ve merakın gücü",
+ html:`
+<p class="lead">9 Ekim 2020'de saat 02.53'te Doudna'nın telefonu çalar: Emmanuelle Charpentier ile birlikte Nobel Kimya Ödülü'nü kazanmıştır. Buluş yalnızca sekiz yaşındadır.</p>
+<h3>Tarihî bir ödül</h3>
+<p>Ödülün iki kadına gitmesi de tarihîdir: 2020'ye kadar kimya ödülü alan 184 kişiden yalnızca beşi kadındı. Charpentier, bunun genç kızlara güçlü bir mesaj olduğunu söyler. Isaacson, Rosalind Franklin'in hayaletinin gülümsediğini hayal eder.</p>
+<h3>CRISPR ilerliyor</h3>
+<p>David Liu'nun geliştirdiği <strong>baz düzenleme</strong> (base editing) DNA'yı kesmeden tek bir harfi değiştirir; <strong>prime düzenleme</strong> (prime editing) daha uzun dizileri yazabilir. Liu'nun benzetmesiyle CRISPR-Cas9 makas, baz düzenleyiciler kurşun kalem, prime düzenleyiciler kelime işlemci gibidir.</p>
+<h3>Bilim nasıl değişti?</h3>
+<p>Pandemide bilim insanları verilerini açık veri tabanlarında ve ön baskı (preprint) sunucularında hızla paylaştı. Ağustos 2020'de ABD'de tıp fakültesi başvuruları bir önceki yıla göre yüzde 17 arttı. Charpentier'in sözüyle: "Günün sonunda kalıcı olan keşiflerdir."</p>
+<h3>Sonsöz: Merak</h3>
+<p>Isaacson New Orleans'taki balkonundan öğrencilere seslenir: Yeniden başlasaydı yaşam bilimlerine çok daha fazla odaklanırdı. Onun kuşağı çocuklarına kod yazmayı öğretti; şimdi <strong>yaşamın kodunu</strong> anlamak gerekiyor. Leonardo'nun "Ağaçkakanın dilini tarif et" notunu hatırlatır. Ve ekler: Acele etmeden, adım adım ve el ele ilerlemeliyiz.</p>`,
+ q:{
+  prompt:"David Liu'nun benzetmesine göre baz düzenleyiciler neye benzer?",
+  options:[
+   {t:"Makasa", f:"Makas benzetmesi DNA'nın iki ipliğini kesen CRISPR-Cas9 için kullanılır."},
+   {t:"Kelime işlemciye", f:"Kelime işlemci benzetmesi daha uzun dizileri yazabilen prime düzenleyiciler içindir."},
+   {t:"Kurşun kaleme; DNA'yı kesmeden tek bir harfi değiştirdikleri için", f:"", c:true}
+  ],
+  good:"Doğru. Cas9 makas, baz düzenleyici kurşun kalem, prime düzenleyici kelime işlemci gibidir. Araçlar giderek daha hassas hâle geliyor."
+ }
+}
+];
+
+const CHECKLIST = [
+ "Bir canlı olayını merak ettiğimde 'Bunu hangi molekül ve hangi yapı yapıyor?' diye sorabiliyorum.",
+ "DNA, RNA ve protein arasındaki bilgi akışını (merkezî dogma) kendi cümlelerimle anlatabiliyorum.",
+ "CRISPR'ın bakterilerde bir bağışıklık sistemi olarak nasıl çalıştığını açıklayabiliyorum.",
+ "Cas9, crRNA, tracrRNA ve tek kılavuz RNA'nın görevlerini ayırt edebiliyorum.",
+ "Temel bilim ile uygulamalı bilimin birbirini nasıl beslediğine bir örnek verebiliyorum.",
+ "Somatik düzenleme ile germ hattı düzenlemesi arasındaki farkı ve neden önemli olduğunu biliyorum.",
+ "Ex vivo ve in vivo tedavilere birer örnek verebiliyorum.",
+ "Tedavi ile iyileştirme arasındaki farkı somut bir vakayla tartışabiliyorum.",
+ "Bir etik kararda bireysel özgürlük, eşitlik ve çeşitlilik değerlerinin nasıl çatışabileceğini görebiliyorum.",
+ "Bilimdeki rekabetin hem faydalarını hem bedellerini değerlendirebiliyorum.",
+ "Bir bilim haberini okurken kaynağı, kanıtı ve tarihini (güncel mi, tarihsel mi) kontrol ediyorum.",
+ "Merak ettiğim bir soruyu araştırmaya dönüştürmek için ilk adımı atabiliyorum."
+];
+
+const KEYQ = [
+ "Bu canlı olayının arkasındaki molekül hangisi ve yapısı ne anlatıyor?",
+ "Bu bilgi DNA'dan RNA'ya, RNA'dan proteine nasıl akıyor?",
+ "Bu buluşu hangi temel merak başlattı?",
+ "Bu düzenleme yalnızca hastayı mı etkiliyor, yoksa gelecek kuşaklara da geçiyor mu?",
+ "Bu bir hastalığın tedavisi mi, yoksa normal bir özelliğin iyileştirilmesi mi?",
+ "Tıbbi bir gereklilik var mı; daha güvenli bir alternatif yok mu?",
+ "Bu teknolojiye kim erişebilecek; eşitsizliği artırır mı?",
+ "Bu karar toplumun çeşitliliğini nasıl etkiler?",
+ "Kanıt ne kadar güçlü; sonuçlar başkalarınca sınandı mı?",
+ "Kimlerin emeği bu buluşta görünmez kalmış olabilir?"
+];
+
+(function(){
+"use strict";
+var STORE_KEY = "codebreaker_isil_tabag_v1";
+var FORM_URL = "https://formsubmit.co/ajax/isiltabag@gmail.com";
+var LETTERS = ["A","B","C","D","E"];
+var FINAL_TEXT = "Çalışmanı tamamladın! Tamamlaman gereken bölüm bu kadardı. Sonuçlarını indir ve Işıl Tabağ'a gönder.";
+var CONT_TEXT = "Devam etmek istersen edebilirsin. Kitapta çok güzel başka öğretiler de var. Devamını kendin için yap; kimseye göndermen gerekmiyor.";
+
+var SUM2 = {
+ b1:"Darwin'in doğal seçilimi ve Mendel'in bezelyeleri; Avery'nin DNA keşfi; Watson, Crick, Wilkins ve Rosalind Franklin'in Fotoğraf 51'i ile çift sarmal; İnsan Genomu Projesi ve Venter ile yarış.",
+ b2:"Doudna'nın Pomona, Harvard, Yale ve Berkeley yolculuğu; Genentech'e kısa geçişi ve dönüşü; Caribou Biosciences'ın kuruluşu ve devlet, üniversite, şirket üçgeni.",
+ b3:"CRISPR patent davası (Berkeley ile Broad), Atılım Ödülü, Doudna ile Charpentier arasındaki soğuma, Eric Lander'ın 'CRISPR'ın Kahramanları' makalesi ve kredi paylaşımı sorunu.",
+ b4:"Biyohacker Josiah Zayner ve yurttaş bilimi, DARPA'nın Güvenli Genler programı ve CRISPR'ı durdurabilen anti-CRISPR proteinleri.",
+ b5:"1975 Asilomar konferansı, Gattaca ve Jesse Gelsinger, Doudna'nın Hitler kâbusu, Napa 2015 ve uluslararası zirveler, He Jiankui sonrası moratoryum tartışması.",
+ b6:"Düşünce deneyleri: Sağır bir çift ve tersine çevirme testi, Eero Mäntyranta ve spor, boyun konumsal bir iyi olması, ruh hâli bozuklukları, yaratıcılık ve Nozick'in deneyim makinesi.",
+ b7:"Quebec'teki CRISPR konferansı ve rekabet, Isaacson'ın Doudna'nın laboratuvarında gen düzenlemesi, James Watson'ın görüşleri, oğlu Rufus ve insanların 'mozaik' olması.",
+ b8:"Pandemide ABD'nin test başarısızlığı, Berkeley'de gönüllülerin kurduğu test laboratuvarı, CARVER ve PAC-MAN ile virüsü CRISPR'la yok etme fikri ve teslimat sorunu.",
+ b9:"2020 Nobel Kimya Ödülü, baz ve prime düzenleme, pandemide açık bilim ve Isaacson'ın sonsözünde öğrencilere seslenen merak çağrısı."
+};
+
+var VIEWS = ["cover"];
+PART1.forEach(function(p){VIEWS.push(p.id);});
+VIEWS.push("r1");
+PART2.forEach(function(p){VIEWS.push(p.id);});
+VIEWS.push("end");
+var PAGES = {};
+PART1.forEach(function(p){p.part=1;PAGES[p.id]=p;});
+PART2.forEach(function(p){p.part=2;PAGES[p.id]=p;});
+
+function blank(){return {v:1, view:"cover", a:{}, b:{}, name:"", email:"", checks:[], startedAt:null, updatedAt:null};}
+var S = load();
+var SAVED_VIEW = S.view;
+
+function load(){
+ try{
+  var raw = window.localStorage.getItem(STORE_KEY);
+  if(!raw) return blank();
+  var o = JSON.parse(raw);
+  if(!o || o.v!==1) return blank();
+  var b = blank();
+  for(var k in b){ if(!(k in o)) o[k]=b[k]; }
+  if(VIEWS.indexOf(o.view)<0) o.view="cover";
+  return o;
+ }catch(e){ return blank(); }
+}
+function save(){
+ S.updatedAt = new Date().toISOString();
+ try{ window.localStorage.setItem(STORE_KEY, JSON.stringify(S)); }catch(e){}
+}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function $(id){return document.getElementById(id);}
+function nowTR(){
+ try{ return new Date().toLocaleString("tr-TR",{timeZone:"Europe/Istanbul",year:"numeric",month:"long",day:"numeric",hour:"2-digit",minute:"2-digit"})+" (İstanbul saati)"; }
+ catch(e){ return new Date().toString(); }
+}
+function rec(p){ var bag = p.part===1 ? S.a : S.b; if(!bag[p.id]) bag[p.id]={att:[],done:false}; return bag[p.id]; }
+function correctIdx(p){ for(var i=0;i<p.q.options.length;i++){ if(p.q.options[i].c) return i; } return -1; }
+function hasProgress(){ return Object.keys(S.a).length>0 || Object.keys(S.b).length>0 || SAVED_VIEW!=="cover"; }
+
+/* ---------- report ---------- */
+function report(){
+ var rows=[], first=0, secs={};
+ Object.keys(SECTIONS).forEach(function(k){secs[k]={name:SECTIONS[k],total:0,first:0};});
+ PART1.forEach(function(p,i){
+  var r=S.a[p.id]||{att:[],done:false}, ci=correctIdx(p);
+  var firstOk = r.att.length>0 && r.att[0]===ci;
+  if(firstOk) first++;
+  secs[p.sec].total++; if(firstOk) secs[p.sec].first++;
+  rows.push({n:i+1,p:p,r:r,firstOk:firstOk,
+   firstText: r.att.length? LETTERS[r.att[0]]+") "+p.q.options[r.att[0]].t : "(cevaplanmadı)",
+   all: r.att.map(function(x,j){return (j+1)+". deneme: "+LETTERS[x]+") "+p.q.options[x].t+(x===ci?" (doğru)":" (yanlış)");}),
+   count:r.att.length});
+ });
+ return {rows:rows, first:first, total:PART1.length, secs:secs,
+  revisit: rows.filter(function(x){return !x.firstOk;}),
+  complete: rows.every(function(x){return x.r.done;})};
+}
+
+/* ---------- rendering ---------- */
+var app;
+function go(view){
+ if(VIEWS.indexOf(view)<0) view="cover";
+ S.view=view; if(view!=="cover" && !S.startedAt) S.startedAt=new Date().toISOString();
+ save(); render();
+ window.scrollTo(0,0);
+ try{ app.focus({preventScroll:true}); }catch(e){}
+}
+function setProgress(){
+ var v=S.view, bar=$("bar"), lab=$("progLabel"), tag=$("partTag");
+ var i1 = PART1.findIndex(function(p){return p.id===v;});
+ var i2 = PART2.findIndex(function(p){return p.id===v;});
+ if(v==="cover"){ bar.style.width="0%"; lab.textContent="Başlangıç · Işıl Tabağ'ın mektubu"; tag.textContent="Giriş"; }
+ else if(i1>=0){ bar.style.width=((i1+1)/PART1.length*100)+"%"; lab.textContent="Birinci kısım · Sayfa "+(i1+1)+" / "+PART1.length; tag.textContent="Birinci kısım"; }
+ else if(v==="r1"){ bar.style.width="100%"; lab.textContent="Birinci kısım · Sonuçlar"; tag.textContent="Birinci kısım"; }
+ else if(i2>=0){ bar.style.width=((i2+1)/(PART2.length+1)*100)+"%"; lab.textContent="İkinci kısım (isteğe bağlı) · Sayfa "+(i2+1)+" / "+(PART2.length+1); tag.textContent="İkinci kısım"; }
+ else { bar.style.width="100%"; lab.textContent="İkinci kısım (isteğe bağlı) · Sayfa "+(PART2.length+1)+" / "+(PART2.length+1); tag.textContent="İkinci kısım"; }
+}
+function render(){
+ setProgress();
+ var v=S.view;
+ if(v==="cover") return renderCover();
+ if(v==="r1") return renderResults();
+ if(v==="end") return renderEnd();
+ return renderPage(PAGES[v]);
+}
+
+function renderCover(){
+ var resume = hasProgress() ? '<div class="resume" id="resumeBox"><p><strong>Kaldığın yerden devam edebilirsin.</strong> Daha önce başladığın çalışma bu tarayıcıda kaydedildi; cevapların duruyor.</p><div class="btnrow"><button class="btn" id="btnResume">Kaldığın yerden devam et</button><button class="btn sec" id="btnRestart">Baştan başla</button></div></div>' : "";
+ app.innerHTML = '<div class="cover-hero"><p class="eyebrow">Etkileşimli okuma çalışması</p><h1>The Code Breaker</h1><div class="by">Walter Isaacson · Jennifer Doudna, gen düzenleme ve insan ırkının geleceği</div><div class="dna-strip" aria-hidden="true">G C A C G U A G U G U · A T G C</div></div>'+
+ resume+
+ '<div class="card"><div class="letter">'+
+ '<p>Sevgili öğrencim,</p>'+
+ '<p>Biyolojiye, genetiğe, tıbba ve bilime ilgi duyduğunu biliyorum; bu yüzden sana çok sevdiğim bir kitabı önermek istiyorum: Walter Isaacson\'ın <em>The Code Breaker</em> kitabı. Kitap, 2020 Nobel Kimya Ödülü\'nü Emmanuelle Charpentier ile paylaşan Jennifer Doudna\'nın ve <strong>CRISPR</strong> adlı gen düzenleme aracının hikâyesini anlatıyor. Hawaii\'de dokununca kapanan otları merak eden bir kız çocuğunun, bakterilerin virüslere karşı geliştirdiği savunma sistemini çözerek hayatın kodunu düzenleyebilen bir araca nasıl ulaştığını okuyacaksın.</p>'+
+ '<p>Bu kitabı sana önermemin nedeni, biyolojiyi ezberlenecek bir ders olarak değil, yaşayan bir keşif macerası olarak göstermesi. DNA ve RNA\'nın nasıl çalıştığını, bir laboratuvarda gerçek bilimin nasıl yapıldığını, iş birliğinin ve rekabetin bilimi nasıl ilerlettiğini göreceksin. Orak hücre hastalığı için yapılan ilk CRISPR tedavilerini, koronavirüs testlerini ve mRNA aşılarını tanıyacaksın. Ve belki en önemlisi, "Bunu yapabiliyoruz ama yapmalı mıyız?" sorusunu düşüneceksin: Tedavi mi, iyileştirme mi? Kararı kim vermeli? İleride tıp, biyoloji, genetik ya da mühendislik okumayı düşünüyorsan bu kitap sana sağlam bir temel ve bol ilham verecek.</p>'+
+ '<p>Senin için hazırladığım çalışma iki kısımdan oluşuyor. <strong>Birinci kısım</strong> kısa: Kitabın en önemli fikirlerini on sayfada, her sayfada bir düşündüren soruyla anlatıyor. Yanlış cevap vermekten çekinme; her yanlışın ardından bir açıklama göreceksin ve yeniden deneyebileceksin. Bitirdiğinde sonuçlarını indir ve bana gönder; nasıl düşündüğünü görmek benim için çok kıymetli. <strong>İkinci kısım</strong> ise tamamen senin için. Merak edersen kitabın geri kalan güzelliklerini orada bulacaksın.</p>'+
+ '<p>Küçük bir not: Kitap 2021\'de yayımlandı ve büyük ölçüde pandemi sırasında yazıldı. Kitaptaki tarihler, sayılar, fiyatlar ve şirketler o döneme ait tarihsel örneklerdir. Önemli olan örneklerin kendisi değil, arkalarındaki bilimsel düşünme biçimi.</p>'+
+ '<p>Keyifli okumalar dilerim. Merakını hiç kaybetme; kitabın da dediği gibi, belki bizi kurtaracak olan tam da odur.</p>'+
+ '<p class="sign">Sevgilerimle,<br>Işıl Tabağ</p>'+
+ '</div><div class="nav"><span></span><button class="btn" id="btnStart">'+(hasProgress()?"Birinci kısmın başına git":"Birinci kısma başla")+'</button></div></div>';
+ $("btnStart").onclick=function(){go("a1");};
+ if($("btnResume")){
+  $("btnResume").onclick=function(){ var v=SAVED_VIEW!=="cover"?SAVED_VIEW:firstUnfinished(); go(v); };
+  $("btnRestart").onclick=function(){ if(window.confirm("Tüm cevapların silinecek ve çalışmaya baştan başlayacaksın. Emin misin?")){ S=blank(); SAVED_VIEW="cover"; save(); go("a1"); } };
+ }
+}
+function firstUnfinished(){
+ for(var i=0;i<PART1.length;i++){ var r=S.a[PART1[i].id]; if(!r||!r.done) return PART1[i].id; }
+ return "r1";
+}
+
+function renderPage(p){
+ var r = rec(p), ci = correctIdx(p);
+ var opts = p.q.options.map(function(o,i){
+  var cls="opt", dis="";
+  if(r.att.indexOf(i)>=0 && i!==ci){cls+=" wrong";dis=" disabled";}
+  if(r.done){dis=" disabled"; if(i===ci) cls+=" right";}
+  return '<button type="button" class="'+cls+'" data-i="'+i+'"'+dis+'><span class="k">'+LETTERS[i]+'</span><span>'+esc(o.t)+'</span></button>';
+ }).join("");
+ var idx = VIEWS.indexOf(p.id);
+ var nextLabel = p.id==="a10" ? "Sonuçlara geç" : (p.id===PART2[PART2.length-1].id ? "Görsel özete geç" : "Sonraki");
+ var gate = p.part===1 && !r.done;
+ var qn = p.part===1 ? "Düşünme sorusu "+(PART1.indexOf(p)+1)+" / "+PART1.length : "Düşünme sorusu";
+ app.innerHTML = '<article class="card"><p class="eyebrow">'+esc(p.chapter)+(p.part===1?' · '+esc(SECTIONS[p.sec]):'')+'</p><h1>'+esc(p.title)+'</h1>'+p.html+
+ '<section class="q" aria-labelledby="qp"><div class="qh">'+qn+'</div><div class="qp" id="qp">'+esc(p.q.prompt)+'</div><div class="opts" id="opts">'+opts+'</div><div class="fb" id="fb" role="status" aria-live="polite"></div></section>'+
+ '<div class="nav"><button class="btn sec" id="btnPrev">Önceki</button><span class="hint" id="hint">'+(gate?"Devam etmek için soruyu doğru cevapla.":"")+'</span><button class="btn" id="btnNext"'+(gate?" disabled":"")+'>'+nextLabel+'</button></div></article>';
+ if(r.done) showFb(p,ci,true);
+ else if(r.att.length){ showFb(p,r.att[r.att.length-1],false); }
+ Array.prototype.forEach.call(document.querySelectorAll("#opts .opt"),function(b){
+  b.onclick=function(){ answer(p,parseInt(b.getAttribute("data-i"),10)); };
+ });
+ $("btnPrev").onclick=function(){ go(VIEWS[idx-1]); };
+ $("btnNext").onclick=function(){ if(p.part===1 && !rec(p).done) return; go(VIEWS[idx+1]); };
+}
+function showFb(p,i,ok){
+ var fb=$("fb");
+ if(ok){ fb.className="fb show good"; fb.innerHTML="<b>Doğru.</b>"+esc(p.q.good); }
+ else { fb.className="fb show bad"; fb.innerHTML="<b>Bu cevap doğru değil.</b>"+esc(p.q.options[i].f)+" <em>Tekrar dene.</em>"; }
+}
+function answer(p,i){
+ var r=rec(p); if(r.done) return;
+ if(r.att.indexOf(i)>=0) return;
+ r.att.push(i);
+ var ci=correctIdx(p);
+ if(i===ci){ r.done=true; }
+ save();
+ var y=window.scrollY; renderPage(p); window.scrollTo(0,y);
+ var fb=$("fb"); if(fb && fb.scrollIntoView){ try{fb.scrollIntoView({block:"nearest"});}catch(e){} }
+}
+
+function reportHTML(R, withLinks){
+ var secRows = Object.keys(R.secs).map(function(k){var s=R.secs[k];return '<tr><td>'+esc(s.name)+'</td><td>'+s.first+' / '+s.total+'</td></tr>';}).join("");
+ var rev = R.revisit.length ? '<ul class="clean">'+R.revisit.map(function(x){return '<li>Soru '+x.n+': '+esc(x.p.title)+(withLinks?' <a href="#" data-go="'+x.p.id+'">Sayfaya dön</a>':'')+'</li>';}).join("")+'</ul>' : '<p>Tüm soruları ilk denemede doğru cevapladın. Tekrar gözden geçirmen gereken bir soru yok.</p>';
+ return '<div class="score"><span class="big" id="scoreNum">'+R.first+' / '+R.total+'</span><span>soruyu ilk denemede doğru cevapladın.</span></div>'+
+ '<h3>Bölüm bazında dağılım</h3><table class="t" id="secTable"><thead><tr><th>Bölüm</th><th>İlk denemede doğru</th></tr></thead><tbody>'+secRows+'</tbody></table>'+
+ '<h3>Tekrar gözden geçirmen gereken sorular</h3><div id="revisit">'+rev+'</div>';
+}
+
+function renderResults(){
+ var R=report();
+ if(!R.complete){
+  var miss = R.rows.filter(function(x){return !x.r.done;});
+  app.innerHTML='<div class="card"><p class="eyebrow">Birinci kısım</p><h1>Neredeyse bitti</h1><div class="missing"><p>Sonuçlarını görebilmek için şu soruları da cevaplaman gerekiyor:</p><ul class="clean">'+
+   miss.map(function(x){return '<li><a href="#" data-go="'+x.p.id+'">Soru '+x.n+': '+esc(x.p.title)+'</a></li>';}).join("")+'</ul></div><div class="nav"><button class="btn sec" id="btnPrev">Önceki</button><span></span></div></div>';
+  bindGo(); $("btnPrev").onclick=function(){go("a10");};
+  return;
+ }
+ app.innerHTML='<div class="card" id="resultsCard"><p class="eyebrow">Birinci kısım · Sonuçlar</p>'+
+ '<p class="final-msg" id="finalMsg">'+esc(FINAL_TEXT)+'</p>'+
+ '<h2>Raporun</h2>'+reportHTML(R,true)+
+ '<h2>Sonuçlarını kaydet ve gönder</h2>'+
+ '<form class="f" id="sendForm" novalidate>'+
+ '<div><label for="fName">Ad Soyad <span class="req">*</span></label><input type="text" id="fName" name="name" autocomplete="name" required value="'+esc(S.name)+'"><div class="err" id="errName">Lütfen adını ve soyadını yaz.</div></div>'+
+ '<div><label for="fEmail">E-posta <span class="en">(isteğe bağlı)</span></label><input type="email" id="fEmail" name="email" autocomplete="email" value="'+esc(S.email)+'"><div class="err" id="errEmail">Geçerli bir e-posta adresi yaz ya da bu alanı boş bırak.</div></div>'+
+ '<div class="btnrow"><button type="button" class="btn" id="btnDownload">Sonuçları indir</button><button type="button" class="btn acc" id="btnSend">Işıl Tabağ\'a Gönder</button></div>'+
+ '</form><div class="status" id="status" role="status" aria-live="polite"></div>'+
+ '<p class="note">"Sonuçları indir" düğmesi yazdırılabilir bir dosya indirir; dosyayı açıp "Yazdır / PDF olarak kaydet" düğmesine basarak PDF olarak saklayabilirsin. "Işıl Tabağ\'a Gönder" düğmesi yalnızca birinci kısımdaki cevaplarını ve raporunu gönderir.</p>'+
+ '<div class="continue"><p id="contText">'+esc(CONT_TEXT)+'</p><div class="nav"><button class="btn sec" id="btnPrev">Önceki</button><span></span><button class="btn" id="btnCont">Devam et</button></div></div></div>';
+ bindGo();
+ $("fName").oninput=function(){S.name=this.value; save(); if(this.value.trim()) $("errName").classList.remove("show");};
+ $("fEmail").oninput=function(){S.email=this.value; save(); $("errEmail").classList.remove("show");};
+ $("btnDownload").onclick=doDownload;
+ $("btnSend").onclick=doSend;
+ $("sendForm").onsubmit=function(e){e.preventDefault();};
+ $("btnPrev").onclick=function(){go("a10");};
+ $("btnCont").onclick=function(){go("b1");};
+}
+function bindGo(){
+ Array.prototype.forEach.call(document.querySelectorAll("[data-go]"),function(a){
+  a.onclick=function(e){e.preventDefault(); go(a.getAttribute("data-go"));};
+ });
+}
+function status(kind,msg){ var s=$("status"); s.className="status show "+kind; s.textContent=msg; }
+function validate(){
+ var n=$("fName").value.trim(), e=$("fEmail").value.trim(), ok=true;
+ S.name=n; S.email=e; save();
+ if(!n){ $("errName").classList.add("show"); $("fName").focus(); ok=false; }
+ if(e && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){ $("errEmail").classList.add("show"); if(ok) $("fEmail").focus(); ok=false; }
+ if(!ok) status("no", !n ? "Devam etmeden önce Ad Soyad alanını doldurman gerekiyor." : "E-posta adresini kontrol et.");
+ return ok ? {name:n,email:e} : null;
+}
+
+/* ---------- download ---------- */
+function buildDownload(who){
+ var R=report(), when=nowTR();
+ var css='body{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#2b2f36;max-width:820px;margin:24px auto;padding:0 20px;line-height:1.55;font-size:14px}h1{color:#0f1f3d;font-size:24px;margin:0 0 4px}h2{color:#0f1f3d;font-size:18px;border-bottom:2px solid #0f1f3d;padding-bottom:4px;margin-top:28px}h3{color:#0f1f3d;font-size:15px;margin:16px 0 6px}table{border-collapse:collapse;width:100%;margin:8px 0 14px}th,td{border:1px solid #cfd6e2;padding:6px 8px;text-align:left;vertical-align:top}th{background:#eef1f6}.sub{color:#5b6472;margin:0 0 16px}.ok{color:#1d5c4a;font-weight:600}.no{color:#8a2d2d;font-weight:600}.bar{background:#0f1f3d;color:#fff;padding:12px 16px;border-radius:8px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:20px}.bar button{background:#1a8577;border:0;color:#fff;font-weight:700;padding:10px 16px;border-radius:6px;cursor:pointer;font-size:14px}.score{font-size:20px;font-weight:700;color:#0f1f3d}ul{padding-left:20px}li{margin-bottom:4px}.ck{list-style:none;padding:0}.ck li{display:flex;gap:10px;align-items:flex-start;border-bottom:1px solid #e3e7ee;padding:6px 0}.ck li span.b{flex:0 0 14px;height:14px;border:1.5px solid #0f1f3d;border-radius:3px;margin-top:3px}.page{page-break-before:always}@media print{.bar{display:none}body{margin:0}h2{page-break-after:avoid}tr{page-break-inside:avoid}}';
+ var h='<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>The Code Breaker · Sonuçlar · '+esc(who.name)+'</title><style>'+css+'</style></head><body>';
+ h+='<div class="bar"><button type="button" onclick="window.print()">Yazdır / PDF olarak kaydet</button><span>Yazdırma penceresinde hedef olarak "PDF olarak kaydet"i seçebilirsin.</span></div>';
+ h+='<h1>The Code Breaker · Walter Isaacson</h1><p class="sub">Birinci kısım sonuçları · Hazırlayan: Işıl Tabağ</p>';
+ h+='<table><tr><th>Ad Soyad</th><td>'+esc(who.name)+'</td></tr><tr><th>E-posta</th><td>'+esc(who.email||"(belirtilmedi)")+'</td></tr><tr><th>Tarih</th><td>'+esc(when)+'</td></tr></table>';
+ h+='<h2>Rapor</h2><p class="score">İlk denemede doğru: '+R.first+' / '+R.total+'</p>';
+ h+='<h3>Bölüm bazında dağılım</h3><table><tr><th>Bölüm</th><th>İlk denemede doğru</th></tr>'+Object.keys(R.secs).map(function(k){var s=R.secs[k];return '<tr><td>'+esc(s.name)+'</td><td>'+s.first+' / '+s.total+'</td></tr>';}).join("")+'</table>';
+ h+='<h3>Tekrar gözden geçirilecek sorular</h3>'+(R.revisit.length?'<ul>'+R.revisit.map(function(x){return '<li>Soru '+x.n+': '+esc(x.p.title)+'</li>';}).join("")+'</ul>':'<p>Yok. Tüm sorular ilk denemede doğru cevaplandı.</p>');
+ h+='<h2>Cevapların</h2><table><tr><th>#</th><th>Soru</th><th>İlk cevabın</th><th>İlk denemede</th><th>Deneme sayısı</th><th>Tüm denemeler</th></tr>';
+ R.rows.forEach(function(x){
+  h+='<tr><td>'+x.n+'</td><td>'+esc(x.p.q.prompt)+'</td><td>'+esc(x.firstText)+'</td><td class="'+(x.firstOk?'ok':'no')+'">'+(x.firstOk?'Doğru':'Yanlış')+'</td><td>'+x.count+'</td><td>'+x.all.map(esc).join('<br>')+'</td></tr>';
+ });
+ h+='</table>';
+ h+='<h2 class="page">Kitaptan öğrendiklerin</h2><p>Birinci kısımda öğrendiğin her bilginin özeti:</p>';
+ PART1.forEach(function(p,i){ h+='<h3>'+(i+1)+'. '+esc(p.title)+' <span style="color:#5b6472;font-weight:400">('+esc(p.chapter)+')</span></h3><ul>'+p.learn.map(function(l){return '<li>'+esc(l)+'</li>';}).join("")+'</ul>'; });
+ h+='<h2>İkinci kısımda seni bekleyenler</h2><p>İsteğe bağlı ikinci kısımda, birinci kısımda yer almayan şu konular var:</p><ul>';
+ PART2.forEach(function(p){ h+='<li><strong>'+esc(p.title)+'</strong> ('+esc(p.chapter)+'): '+esc(SUM2[p.id])+'</li>'; });
+ h+='</ul>';
+ h+='<h2>Bilim okuryazarlığı kontrol listesi</h2><p>Kitabın bakış açısını kendine mal ettiğini gösteren kontrol listesi. Kendini değerlendir ve işaretle:</p><ul class="ck">'+CHECKLIST.map(function(c){return '<li><span class="b"></span><span>'+esc(c)+'</span></li>';}).join("")+'</ul>';
+ h+='<p class="sub" style="margin-top:24px">Not: Kitap 2021\'de yayımlanmıştır; tarihler, sayılar, fiyatlar ve şirketlerle ilgili örnekler o döneme ait tarihsel örneklerdir.</p></body></html>';
+ return h;
+}
+function slug(s){ return s.toLowerCase().replace(/ç/g,"c").replace(/ğ/g,"g").replace(/ı/g,"i").replace(/ö/g,"o").replace(/ş/g,"s").replace(/ü/g,"u").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"ogrenci"; }
+function doDownload(){
+ var who=validate(); if(!who) return;
+ var html=buildDownload(who);
+ var blob=new Blob([html],{type:"text/html;charset=utf-8"});
+ var url=URL.createObjectURL(blob);
+ var a=document.createElement("a"); a.href=url; a.download="the-code-breaker-sonuclar-"+slug(who.name)+".html";
+ document.body.appendChild(a); a.click(); document.body.removeChild(a);
+ setTimeout(function(){URL.revokeObjectURL(url);},4000);
+ status("ok","Sonuç dosyan indirildi. Dosyayı açıp 'Yazdır / PDF olarak kaydet' düğmesiyle PDF olarak saklayabilirsin.");
+}
+
+/* ---------- send ---------- */
+function buildPayload(who){
+ var R=report();
+ var d={
+  "_subject":"The Code Breaker cevapları - "+who.name,
+  "_template":"table",
+  "_captcha":"false",
+  "Ad Soyad":who.name,
+  "E-posta":who.email||"(belirtilmedi)",
+  "Gönderim zamanı":nowTR(),
+  "İlk denemede doğru":R.first+" / "+R.total,
+  "Bölüm bazında dağılım":Object.keys(R.secs).map(function(k){var s=R.secs[k];return s.name+": "+s.first+"/"+s.total;}).join(" | "),
+  "Tekrar gözden geçirilecek sorular":R.revisit.length?R.revisit.map(function(x){return "Soru "+x.n+" ("+x.p.title+")";}).join("; "):"Yok"
+ };
+ if(who.email) d["_replyto"]=who.email;
+ R.rows.forEach(function(x){
+  d["Soru "+(x.n<10?"0":"")+x.n+" - "+x.p.title]="İlk cevap: "+x.firstText+" | İlk denemede: "+(x.firstOk?"Doğru":"Yanlış")+" | Deneme sayısı: "+x.count+" | Tüm denemeler: "+x.all.join(" ; ");
+ });
+ return d;
+}
+var sending=false;
+function doSend(){
+ if(sending) return;
+ var who=validate(); if(!who) return;
+ var payload=buildPayload(who);
+ sending=true; var btn=$("btnSend"); btn.disabled=true; btn.textContent="Gönderiliyor...";
+ status("info","Sonuçların gönderiliyor, lütfen bekle...");
+ var ctrl = window.AbortController ? new AbortController() : null;
+ var to = setTimeout(function(){ if(ctrl) ctrl.abort(); },20000);
+ fetch(FORM_URL,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload),signal:ctrl?ctrl.signal:undefined})
+ .then(function(res){ return res.json().catch(function(){return {};}).then(function(j){return {ok:res.ok,j:j};}); })
+ .then(function(o){
+  var succ = o.ok && (o.j.success===true || o.j.success==="true");
+  if(succ){ S.sentAt=new Date().toISOString(); save(); status("ok","Teşekkürler! Sonuçların Işıl Tabağ'a başarıyla gönderildi."); }
+  else if(o.j && o.j.message && /activat/i.test(o.j.message)){ status("no","Gönderim henüz tamamlanamadı: Bu form ilk kez kullanıldığı için Işıl Tabağ'ın e-posta adresine bir onay bağlantısı gönderildi. Onaylandıktan sonra lütfen yeniden gönder. Bu arada sonuçlarını indirmeyi unutma."); }
+  else { status("no","Gönderim sırasında bir sorun oluştu. Lütfen biraz sonra tekrar dene; olmazsa sonuçlarını indirip dosyayı Işıl Tabağ'a e-postayla gönderebilirsin."); }
+ })
+ .catch(function(){ status("no","Gönderilemedi. İnternet bağlantını kontrol edip tekrar dene; olmazsa sonuçlarını indirip dosyayı Işıl Tabağ'a e-postayla gönderebilirsin."); })
+ .then(function(){ clearTimeout(to); sending=false; var b=$("btnSend"); if(b){ b.disabled=false; b.textContent="Işıl Tabağ'a Gönder"; } });
+}
+
+/* ---------- final visual summary ---------- */
+function renderEnd(){
+ var checks = CHECKLIST.map(function(c,i){ return '<li><input type="checkbox" id="ck'+i+'" data-i="'+i+'"'+(S.checks[i]?" checked":"")+'><label for="ck'+i+'">'+esc(c)+'</label></li>'; }).join("");
+ app.innerHTML='<div class="card"><p class="eyebrow">İkinci kısım · Kitabın tamamı</p><h1>Görsel özet: Yaşamın kodunu okumak ve yazmak</h1>'+
+ '<p class="lead">Kitabın elli altı bölümü tek bir yolculuğu anlatır: Doğayı merak etmekten, onu anlamaya; anlamaktan, onu değiştirebilmeye; değiştirebilmekten de bunu nasıl ve ne zaman yapmamız gerektiğini sormaya.</p>'+
+ '<div class="flow" aria-label="Bilgi akışı"><span class="n">DNA</span><span class="a">→</span><span class="n">RNA</span><span class="a">→</span><span class="n">Protein</span><span style="color:var(--muted);font-size:14px">Merkezî dogma: Kitabın yıldız molekülü RNA, hem CRISPR\'ın kılavuzu hem de aşıların habercisidir.</span></div>'+
+ '<div class="schema" aria-label="Kitabın şeması">'+
+  '<div class="core"><b>CRISPR-Cas9: Programlanabilir genetik makas</b><span>Bakterilerin virüslere karşı milyarlarca yılda geliştirdiği bağışıklık sistemi; kılavuz RNA değiştirilerek istenen gene yönlendirilebilen bir araca dönüştü.</span></div>'+
+  '<div class="arrow">Merak etmekten sorumluluğa dört adım</div>'+
+  '<div class="grid">'+
+   '<div class="box"><h4>1 · Merak</h4><p>Kısım 1-2. Hilo\'daki uyuyan ot, Çift Sarmal, RNA ve ribozimler; Mojica\'nın tuzlu bataklıkları, yoğurt bakterileri.</p><div class="sol"><b>Ders:</b> Temel bilim, beklenmedik devrimlerin tohumudur.</div></div>'+
+   '<div class="box"><h4>2 · Keşif</h4><p>Kısım 2-3. Doudna ve Charpentier, tracrRNA, tek kılavuz RNA (2012); Zhang ve Church ile insan hücreleri yarışı.</p><div class="sol"><b>Ders:</b> Bilim ekip işidir; rekabet hızlandırır ama bedeli vardır.</div></div>'+
+   '<div class="box"><h4>3 · Uygulama</h4><p>Kısım 4 ve 9. Victoria Gray\'in orak hücre tedavisi, körlük, kanser; COVID testleri, mRNA aşıları, CARVER ve PAC-MAN.</p><div class="sol"><b>Ders:</b> Teslimat, maliyet ve erişim, tedavinin kendisi kadar önemlidir.</div></div>'+
+   '<div class="box"><h4>4 · Sorumluluk</h4><p>Kısım 5-8. Asilomar\'dan Hong Kong\'a, He Jiankui ve CRISPR bebekleri; tedavi ve iyileştirme, eşitlik, çeşitlilik.</p><div class="sol"><b>Ders:</b> Germ hattı gerçek bir çizgidir; ihtiyatla ve birlikte ilerlemeliyiz.</div></div>'+
+  '</div>'+
+  '<div class="arrow">Hepsinin sonucu</div>'+
+  '<div class="base"><strong>Yaşamın kodunu anlamak</strong> artık her bilinçli yurttaşın ihtiyacıdır. Merak keşfi, keşif teknolojiyi doğurur; ama teknolojinin nasıl kullanılacağına bilim insanları, hümanistler ve toplum birlikte karar vermelidir.</div>'+
+ '</div>'+
+ '<h2>Kısım kısım tek cümle</h2><table class="t"><thead><tr><th>Kısım</th><th>Ana fikir</th></tr></thead><tbody>'+
+ [["Giriş · Gediğe atılmak","Mart 2020: CRISPR'ın kâşifi Doudna, pandemiye karşı Berkeley'de bir bilim seferberliği başlatır."],["1 · Hayatın kökenleri","Merak ve 'yapı işlevi belirler' fikri Doudna'yı DNA'dan RNA'ya ve ribozimlere götürür."],["2 · CRISPR","Bakterilerin bağışıklık sistemi çözülür; Doudna ve Charpentier 2012'de programlanabilir makası bulur."],["3 · Gen düzenleme","İnsan hücreleri yarışı, şirketler, ödüller ve patent kavgaları."],["4 · Uygulamada CRISPR","Orak hücre, körlük ve kanser tedavileri; biyohacker'lar ve biyogüvenlik."],["5 · Kamusal bilim insanı","Asilomar'dan Napa'ya: Bilim insanları kuralları birlikte tartışır."],["6 · CRISPR bebekleri","He Jiankui germ hattını aşar; dünya tepki verir, o da hapis cezası alır."],["7 · Ahlaki sorular","Kırmızı çizgiler, tedavi ve iyileştirme, kim karar vermeli, Doudna'nın etik yolculuğu."],["8 · Cepheden notlar","Quebec'te rekabet, laboratuvarda bir gün, Watson ve 'mozaik' insanlar."],["9 · Koronavirüs","Test laboratuvarı, CRISPR testleri, mRNA aşıları, CRISPR tedavileri ve 2020 Nobel'i."],["Sonsöz · Royal Street","Merak bizi kurtarabilir; yaşamın kodunu anlamak ve el ele, dikkatle ilerlemek gerekir."]].map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';}).join("")+
+ '</tbody></table>'+
+ '<h2>Bir bilim insanı gibi sorulacak on soru</h2><ol class="keyq">'+KEYQ.map(function(q){return '<li>'+esc(q)+'</li>';}).join("")+'</ol>'+
+ '<h2>Kontrol listesi</h2><p>Kendini değerlendir; işaretlediklerin bu tarayıcıda saklanır.</p><ul class="check" id="checks">'+checks+'</ul>'+
+ '<p class="note">Bu kısım tamamen senin içindi; hiçbir cevabın gönderilmedi. Okuduğun için teşekkür ederim.</p>'+
+ '<div class="nav"><button class="btn sec" id="btnPrev">Önceki</button><span></span><button class="btn" id="btnHome">Başa dön</button></div></div>';
+ Array.prototype.forEach.call(document.querySelectorAll("#checks input"),function(c){
+  c.onchange=function(){ S.checks[parseInt(c.getAttribute("data-i"),10)]=c.checked; save(); };
+ });
+ $("btnPrev").onclick=function(){go(PART2[PART2.length-1].id);};
+ $("btnHome").onclick=function(){go("cover");};
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+ app=$("app");
+ S.view="cover";
+ render();
+});
+})();
+
+</script>
+</body>
+</html>
